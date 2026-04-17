@@ -25,10 +25,13 @@ cd "/Users/brigh/Documents/Claude/Projects/HANK JOHN/hank-edgeworth-complementar
 git config --global user.name  "Bright Quaye"
 git config --global user.email "b.quaye@wustl.edu"
 
-# Initialize and commit (skip if already done):
-git init -b main
-git add .
-git commit -m "Initial import: paper draft, code, reproduction pipeline"
+# The repo was already initialized with an initial commit (dba42a2).
+# Add any new files generated since (compiled PDF, figures, etc.):
+git add -A
+git commit -m "Add generated figures and compiled PDF" || echo "nothing to commit"
+
+# If you need to re-initialize from scratch instead:
+#   git init -b main && git add -A && git commit -m "Initial import"
 
 # Add the GitHub remote:
 git remote add origin https://github.com/Cyrus44511/hank-edgeworth-complementarity.git
