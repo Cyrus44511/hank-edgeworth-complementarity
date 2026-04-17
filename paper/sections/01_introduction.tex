@@ -1,43 +1,34 @@
 \section{Introduction}\label{sec:intro}
 
-How large is the fiscal multiplier, and what determines its size? A substantial
-empirical and theoretical literature has identified three facts that any serious
-model of fiscal transmission must confront simultaneously \citep{Auclert2024}:
-
-\begin{description}[leftmargin=1.4em]
-  \item[Fact 1.] \textit{Marginal propensities to consume (MPCs) are high.}
-    Households spend approximately 25 cents of every additional dollar of income
-    in the quarter they receive it, and around 50 cents annually
-    \citep{KaplanViolante2014,Fagereng2021}.
-  \item[Fact 2.] \textit{Marginal propensities to earn (MPEs) are low.} When
-    households receive a windfall, they reduce their labor supply very little;
-    empirical estimates place the annual MPE between $0$ and $0.04$
-    \citep{Cesarini2017}.
-  \item[Fact 3.] \textit{Fiscal multipliers are moderate.} Under accommodative
-    monetary policy, both impact and cumulative multipliers lie in the range
-    $0.6$--$2.0$ \citep{Ramey2019,Christiano2011,Woodford2011}.
-\end{description}
-
-\noindent\auclert{} show that these three facts create a \emph{trilemma} for New
-Keynesian models with frictionless labor supply: it is impossible to match all
-three simultaneously with standard separable preferences. Matching Facts~1 and~2
-requires strong consumption--labor complementarity ($U_{cn}\neq 0$), but this
-same complementarity generates multipliers that violate Fact~3. \BHL{} resolve
-the trilemma through a different non-separability: by separately parameterizing
-complementarity and income effects in $U(c,n)$, they allow the model to target
-MPCs and MPEs independently of the multiplier.
+How large is the fiscal multiplier, and what determines its size? Three
+empirical regularities must be matched simultaneously by any serious model of
+fiscal transmission \citep{Auclert2024}: high marginal propensities to consume
+(MPCs $\approx$ $0.25$ quarterly, $0.5$ annually; \citealp{KaplanViolante2014,Fagereng2021}),
+low marginal propensities to earn (MPEs $\in [0, 0.04]$ annually;
+\citealp{Cesarini2017}), and moderate fiscal multipliers ($0.6$--$2.0$;
+\citealp{Ramey2019,Christiano2011,Woodford2011}). \auclert{} show these facts
+form a \emph{trilemma}: in New Keynesian models with frictionless labor
+supply, no separable-preference calibration can match all three.
 
 \smallskip
-This paper introduces a \emph{new dimension} to this debate. Both \auclert{} and
-\BHL{} work with utility over consumption and labor: $U(c,n)$. We extend the
-utility function to $U(c,g,n)$, where $g$ is government spending -- a publicly
-provided good that directly enters household preferences. The cross-partial
-$U_{cg}^{j}\neq 0$ is \emph{\EC{}} between private and public consumption: a
-rise in $g$ raises (if $U_{cg}^{j}>0$) or lowers (if $U_{cg}^{j}<0$) the marginal
-utility of private consumption. This is empirically well-documented
-\citep{Karras1994,JallesKarras2022,FrancoisKeinsley2023,Francois2023,BarthelFrancois2025}
-and generates a fiscal-transmission mechanism that is entirely absent from
-models where government spending enters only through the resource constraint.
+The extant solutions operate through the labor-supply margin. \auclert{}
+themselves propose sticky wages. \BHL{} solve the trilemma through
+consumption--labor complementarity $U_{cn}\neq 0$. We propose a third,
+orthogonal resolution that operates through the \emph{government-spending}
+margin. Extending household utility from $U(c,n)$ to $U(c,g,n)$ turns
+public-good provision into a direct preference-shifter: the cross-partial
+$U_{cg}^{j} \neq 0$ captures \EC{} between private consumption and publicly
+provided goods. This extension is empirically well-documented
+\citep{Karras1994,JallesKarras2022,FrancoisKeinsley2023,Francois2023,BarthelFrancois2025,Bilbiie2011}
+and distributionally heterogeneous: poor households complement public
+provision (public health raises the value of private nutrition; public
+transit enables labor-force participation), while wealthy households
+privately substitute (private healthcare, private schools, private
+security). \citet{Gethin2023} documents exactly this gradient: public goods
+are disproportionately consumed by the bottom of the income distribution,
+with incidence that is both large (public provision accounts for $30\%$ of
+global GDP and $20\%$ of global poverty reduction since $1980$) and sharply
+regressive.
 
 \paragraph{Contribution.} Our central contribution is threefold, with each point
 corresponding to an empirically-testable new channel:
