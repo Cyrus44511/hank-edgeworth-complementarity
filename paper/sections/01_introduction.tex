@@ -1,0 +1,304 @@
+\section{Introduction}\label{sec:intro}
+
+How large is the fiscal multiplier, and what determines its size? A substantial
+empirical and theoretical literature has identified three facts that any serious
+model of fiscal transmission must confront simultaneously \citep{Auclert2024}:
+
+\begin{description}[leftmargin=1.4em]
+  \item[Fact 1.] \textit{Marginal propensities to consume (MPCs) are high.}
+    Households spend approximately 25 cents of every additional dollar of income
+    in the quarter they receive it, and around 50 cents annually
+    \citep{KaplanViolante2014,Fagereng2021}.
+  \item[Fact 2.] \textit{Marginal propensities to earn (MPEs) are low.} When
+    households receive a windfall, they reduce their labor supply very little;
+    empirical estimates place the annual MPE between $0$ and $0.04$
+    \citep{Cesarini2017}.
+  \item[Fact 3.] \textit{Fiscal multipliers are moderate.} Under accommodative
+    monetary policy, both impact and cumulative multipliers lie in the range
+    $0.6$--$2.0$ \citep{Ramey2019,Christiano2011,Woodford2011}.
+\end{description}
+
+\noindent\auclert{} show that these three facts create a \emph{trilemma} for New
+Keynesian models with frictionless labor supply: it is impossible to match all
+three simultaneously with standard separable preferences. Matching Facts~1 and~2
+requires strong consumption--labor complementarity ($U_{cn}\neq 0$), but this
+same complementarity generates multipliers that violate Fact~3. \BHL{} resolve
+the trilemma through a different non-separability: by separately parameterizing
+complementarity and income effects in $U(c,n)$, they allow the model to target
+MPCs and MPEs independently of the multiplier.
+
+\smallskip
+This paper introduces a \emph{new dimension} to this debate. Both \auclert{} and
+\BHL{} work with utility over consumption and labor: $U(c,n)$. We extend the
+utility function to $U(c,g,n)$, where $g$ is government spending -- a publicly
+provided good that directly enters household preferences. The cross-partial
+$U_{cg}^{j}\neq 0$ is \emph{\EC{}} between private and public consumption: a
+rise in $g$ raises (if $U_{cg}^{j}>0$) or lowers (if $U_{cg}^{j}<0$) the marginal
+utility of private consumption. This is empirically well-documented
+\citep{Karras1994,JallesKarras2022,FrancoisKeinsley2023,Francois2023,BarthelFrancois2025}
+and generates a fiscal-transmission mechanism that is entirely absent from
+models where government spending enters only through the resource constraint.
+
+\paragraph{Contribution.} Our central contribution is threefold, with each point
+corresponding to an empirically-testable new channel:
+
+\begin{enumerate}[leftmargin=1.6em]
+  \item We characterize a \textbf{direct fiscal channel $\xi$} -- absent from
+    the separable framework of \bilbiie{} -- that captures how government
+    spending directly stimulates private demand through its effect on the
+    marginal utility of consumption. This channel depends on the
+    cross-elasticities $\epsilon^{j}_{cg}$ and is new to the literature.
+    Crucially, $\xi$ and the standard income-cyclicality statistic $\chi$ are
+    cleanly separated: $\chi$ is identified by $\epsilon^{j}_{cc}$ moments alone,
+    while $\xi$ is identified by $\epsilon^{j}_{cg}$ moments -- giving
+    researchers two independent sufficient statistics for fiscal transmission.
+  \item We show that \textbf{heterogeneous internalization}
+    ($\theta^{H}\neq\theta^{S}$) generates curvature heterogeneity across
+    household types. Since $\epsilon^{j}_{cc}=\sigma\alpha^{j}$ under the linear
+    specification, $\theta^{H}\neq\theta^{S}$ induces
+    $\alpha^{H}\neq\alpha^{S}$, which shifts income cyclicality $\chi$
+    \emph{independently} of the hand-to-mouth share $\lambda$. This $\theta$-induced
+    curvature heterogeneity provides a new route to the MPC/MPE trilemma
+    resolution of \auclert{} -- one that operates through the government
+    spending margin rather than through consumption--labor non-separability,
+    and works even when $U_{cn}=0$ exactly.
+  \item We derive a \textbf{distributional dominance condition} linking
+    inequality, complementarity, and multiplier size: fiscal policy is most
+    effective precisely where it is most needed -- in unequal economies where
+    the poor disproportionately complement public goods with private
+    consumption. Quantitatively, in a HANK calibration disciplined by US micro
+    data, moving from the separable benchmark to heterogeneous internalization
+    raises impact multipliers by 0.12--0.34 log points.
+\end{enumerate}
+
+\paragraph{The direct fiscal channel: a new sufficient statistic.}
+The first contribution deserves emphasis because it stands independently of the
+trilemma discussion and is arguably the paper's cleanest result. In \bilbiie{}'s
+separable framework, the fiscal multiplier depends on one sufficient statistic:
+income cyclicality $\chi$. Government spending affects output only through
+general-equilibrium income effects -- it raises wages and profits, which raise
+\HtM{} income, which feeds back into demand. There is no channel by which $g$
+directly affects the private consumption decision.
+
+\smallskip
+Introducing $U_{cg}^{j}\neq 0$ creates a second sufficient statistic: $\xi$, the
+direct fiscal channel. When $g$ rises, the marginal utility of private
+consumption changes -- upward for households with $\epsilon^{j}_{cg}<0$
+(complements) and downward for those with $\epsilon^{j}_{cg}>0$ (substitutes).
+This directly alters how much \HtM{} households spend out of any given income,
+above and beyond the standard wealth and income effects. Formally, $\xi$ captures
+the direct response of \HtM{} consumption to the fiscal shock:
+$\hat c^{H}_{t}=\chi\,\hat c_{t}+\xi\,\hat g_{t}$, where the $\xi\,\hat g_{t}$
+term is entirely new. In \bilbiie{}'s separable world,
+$\xi=\zeta(\chi-\mu/\lambda)$ -- a function of $\chi$ alone. In our framework,
+$\xi$ also depends on $\epsilon^{H}_{cg}$ and $\epsilon^{S}_{cg}$, giving it
+\emph{independent variation}.
+
+\smallskip
+Crucially, $\xi$ and $\chi$ are cleanly separated in the general specification:
+Proposition~\ref{prop:chi-general} shows $\chi$ depends on $\epsilon^{j}_{cc}$
+only, while Proposition~\ref{prop:xi-general} shows $\xi$ depends on
+$\epsilon^{j}_{cg}$. This separation means the two channels can be
+\emph{independently disciplined by data} -- income cyclicality moments identify
+$\epsilon^{j}_{cc}$, while the consumption response to government spending
+shocks identifies $\epsilon^{j}_{cg}$. The distributional dominance condition
+in Corollary~\ref{cor:het} follows directly from the $\xi$ channel: whether
+fiscal policy generates larger or smaller multipliers than the separable
+benchmark depends on whether the \HtM{} complementarity effect (which raises
+$\xi$ when $\epsilon^{H}_{cg}<0$) dominates the saver substitutability effect
+(which dampens $\xi$ when $\epsilon^{S}_{cg}>0$). This is a result that has
+nothing to do with the trilemma and holds regardless of whether
+$\theta^{H}=\theta^{S}$.
+
+\paragraph{The new trilemma resolution.}
+In the standard separable THANK framework \citep{Bilbiie2025}, income cyclicality
+is $\chi^{\mathrm{sep}}=1+\phi(1-\tau_{D}/\lambda)$, which depends on $\lambda$
+(the \HtM{} share). Since the aggregate MPC also depends primarily on $\lambda$,
+the two are coupled: raising $\lambda$ to match high MPCs simultaneously raises
+$\chi$ (MPEs). This is the separable version of the trilemma within THANK.
+
+\smallskip
+Now introduce $\theta^{H}\neq\theta^{S}$ -- heterogeneous internalization. Under
+Assumption~\ref{asm:linear}, $\epsilon^{j}_{cc}=\sigma\alpha^{j}$ where
+$\alpha^{j}=\bar c/(\bar c+\theta^{j}\bar g)$. When $\theta^{H}\neq\theta^{S}$,
+this induces $\alpha^{H}\neq\alpha^{S}$ -- curvature heterogeneity across
+household types. Income cyclicality becomes
+\[
+  \chi(\theta^{S},\theta^{H})=
+  \frac{K(\phi+\sigma\alpha^{S})}
+       {(\phi+\sigma\alpha^{H}) - K\sigma\lambda(\alpha^{H}-\alpha^{S})}.
+\]
+The aggregate MPC is still governed primarily by $\lambda$. But $\chi$ now also
+depends on $\alpha^{H}-\alpha^{S}$ -- the $\theta$-induced curvature gap --
+\emph{independently} of $\lambda$. By adjusting $\theta^{H}-\theta^{S}$ while
+holding $\lambda$ fixed, a researcher can shift $\chi$ to match Fact~2 without
+disturbing the MPC calibration for Fact~1.
+
+\smallskip
+Two clarifications are essential. First, the mechanism runs through
+$\epsilon^{j}_{cc}$, not through $\epsilon^{j}_{cg}$ directly: $\chi$ does not
+depend on $\epsilon^{j}_{cg}$. The resolution is therefore more precisely a
+$\theta$-induced curvature-heterogeneity mechanism -- $\theta^{j}$ shifts the
+effective consumption curvature $\sigma\alpha^{j}$, and it is this curvature gap
+that decouples $\chi$ from $\lambda$. Second, this works even with fully
+separable consumption--labor preferences ($U_{cn}=0$), making it
+\emph{orthogonal} to the resolutions of \auclert{} and \BHL{}.
+
+\paragraph{Why complementarity is heterogeneous.}
+The empirical evidence strongly motivates $\theta^{H}\neq\theta^{S}$ as a
+maintained hypothesis. \citet{Gethin2023} constructs novel estimates of global
+poverty that incorporate the consumption of public services and documents that
+public goods are strongly progressive in their incidence: poor households are
+disproportionate beneficiaries of public education, healthcare, housing, and
+transport infrastructure. Public goods represent 30\% of global GDP and have
+accounted for approximately 20\% of global poverty reduction since 1980. This
+distributional incidence is directly consistent with \HtM{} households treating
+public goods as complements to private consumption: public health services raise
+the productivity of private spending on nutrition; public transport enables
+private labor-market participation and reduces commuting costs for low-income
+workers; publicly provided education complements private inputs into children's
+human capital in low-income households. For these agents, a rise in $g$ raises
+$U^{H}_{c}$, inducing more private spending on top of the direct demand effect.
+\citet{Francois2023} finds structural evidence for this complementarity among
+rule-of-thumb consumers in Sub-Saharan Africa; \citet{BarthelFrancois2025}
+establish that the complementarity relationship depends on income through
+non-homothetic preferences, motivating type-varying $\theta^{j}$.
+
+Wealthier unconstrained households, by contrast, tend to substitute: they
+privately purchase alternatives -- private healthcare, private schools, private
+security, private transport -- so public expansion may crowd out their private
+spending. \citet{Gethin2023} documents this aggregate substitution pattern
+across countries: where public provision is lower, private out-of-pocket spending
+on healthcare and education is higher. This asymmetry is precisely what
+generates the curvature gap: $\theta^{H}<0$ (complements) raises $\alpha^{H}$
+while $\theta^{S}>0$ (substitutes) lowers $\alpha^{S}$, widening
+$\alpha^{H}-\alpha^{S}$ and shifting $\chi$ independently of $\lambda$.
+
+\paragraph{Empirical discipline.}
+Section~\ref{sec:empirical} develops a micro-to-macro identification strategy
+that delivers household-type-specific estimates of $\theta^{j}$ suitable for
+structural calibration. We combine three sources of variation. First, we use
+household-level cross-elasticities between public-good provision and private
+consumption estimated from the \textit{Consumer Expenditure Survey} (CEX) matched
+to state-year variation in Medicaid expansions, public-transit funding, and
+K--12 spending. Second, we exploit the quasi-experimental variation in the
+incidence of public goods documented by \citet{Gethin2023} to discipline the
+aggregate dispersion across household types. Third, we use the VAR-based
+consumption response to government-spending shocks \citep{Ramey2011} as a
+pattern-matching target for the reduced-form $\xi$ statistic. Our preferred
+estimates imply $\theta^{H}\in[-0.90,-0.62]$ and
+$\theta^{S}\in[0.21,0.38]$ -- a curvature gap that is statistically and
+economically significant.
+
+\paragraph{Main analytical results.}
+We embed $U(c,g,n)$ with $U_{cg}^{j}\neq 0$ into the THANK framework of
+\bilbiie{} and derive closed-form results under general non-separable
+preferences, then specialize to the linear effective consumption form
+$\tilde c^{j}=c^{j}+\theta^{j}g$. Two sufficient statistics characterize the
+equilibrium. Income cyclicality $\chi$ (the MPE in our model) is determined by
+own-consumption curvature $\epsilon^{j}_{cc}$ and by the heterogeneous
+internalization gap $\theta^{H}-\theta^{S}$. The direct fiscal channel $\xi$ is
+determined by the cross-elasticities $\epsilon^{j}_{cg}$ capturing \EC{}. These
+two objects are cleanly separated in the symmetric case: $c$--$g$
+non-separability modifies $\xi$ but leaves $\chi$ equal to \bilbiie{}'s
+expression. Under heterogeneous internalization, the separation breaks and
+$\chi$ acquires additional degrees of freedom.
+
+The general fiscal multiplier is
+\begin{equation}\label{eq:multiplier-intro}
+  \mu(\theta^{S},\theta^{H}) = 1 +
+  \frac{\lambda\,\xi(\theta^{S},\theta^{H})}
+       {1-\lambda\,\chi(\theta^{S},\theta^{H})}.
+\end{equation}
+A distributional dominance condition governs the net effect: fiscal policy is
+more effective in more unequal economies \emph{both} because of high MPCs among
+the poor and because the poor are precisely those for whom $g$ is most
+complementary to private consumption. Countercyclical inequality
+($\chi>1$, empirically standard: \citealp{Bilbiie2025,Patterson2023}) amplifies
+both channels simultaneously.
+
+\paragraph{Quantitative results.}
+Section~\ref{sec:quant} takes the model to a full HANK calibration following
+\citet{KaplanMollViolante2018}. We discipline the wealth distribution to match
+the Survey of Consumer Finances, the intertemporal MPC to match
+\citet{Fagereng2021}, and the distribution of $\theta^{j}$ using the empirical
+estimates from Section~\ref{sec:empirical}. Three findings stand out. First, the
+impact multiplier rises from $1.50$ in the separable benchmark to $1.68$--$1.84$
+under heterogeneous internalization -- economically large relative to the
+dispersion in the VAR-based empirical literature. Second, the multiplier
+amplification is concentrated in the bottom of the wealth distribution: the
+consumption response in the bottom quintile is 2.3 times larger than in the top
+quintile, versus a ratio of 1.4 in the separable model. Third, scenario analysis
+reveals that fiscal policy targeted at public services used by low-income
+households (health, transit, education) generates output multipliers up to 38\%
+larger than untargeted transfers.
+
+\paragraph{Policy implications.}
+The model transforms fiscal policy from a question of aggregate size into a
+question of distributional design. The stakes are large: \citet{Gethin2023}
+documents that public goods account for 20\% of global poverty reduction since
+1980. Our framework provides a general-equilibrium mechanism that helps explain
+why: spending that reaches complementarity-experiencing households generates
+larger aggregate demand effects, aligning equity and efficiency. Fiscal
+consolidation has \emph{asymmetric} welfare costs -- cutting public services
+depresses $U^{H}_{c}$ for constrained households, compressing their effective
+demand in ways that standard models systematically underestimate, because those
+models suppress the $c$--$g$ complementarity channel entirely. The welfare cost
+of austerity falling on public health, education, and transport is therefore
+larger than conventional multiplier estimates suggest.
+
+\smallskip
+This is particularly acute in low-income and developing economies.
+\citet{Gethin2023} documents a ``triple curse'' for poor countries: they spend
+less on public services, spend more regressively, and provide lower quality.
+In our framework, these are precisely the economies where $\lambda$ is largest,
+where $|\theta^{H}|$ is potentially strongest (poor households rely most heavily
+on public services as inputs to private consumption), and where the curvature
+gap $\alpha^{H}-\alpha^{S}$ is widest. The model therefore predicts that
+well-targeted fiscal expansions in low-income countries -- directing public
+spending toward services used by constrained households -- could generate
+multiplier effects substantially larger than those estimated for advanced
+economies, precisely because the distributional dominance condition is most
+favorable there. Automatic stabilizers that maintain public consumption during
+downturns do double duty: they stabilize aggregate demand and protect the
+private consumption complementarity of the most vulnerable, a consideration
+entirely absent from models where $g$ enters only through the resource
+constraint.
+
+\paragraph{Related literature.}
+Our paper contributes to five strands. \emph{First} and most directly, the
+literature on the MPC/MPE trilemma: \citet{Auclert2024} who identify it and
+propose sticky wages as the solution; \BHL{} who resolve it through $c$--$n$
+complementarity ($U_{cn}\neq 0$); we provide a complementary resolution through
+$\theta$-induced curvature heterogeneity under heterogeneous internalization
+($\theta^{H}\neq\theta^{S}$), which operates through the government-spending
+margin and is orthogonal to existing labor-supply-based resolutions.
+\emph{Second}, the literature on non-separable government spending in utility:
+\citet{BouakezRebei2007}, \citet{LinnemannSchabert2006}, \citet{Feve2013} in
+RANK; \citet{Bilbiie2011} on the fiscal policy puzzle; and the empirical
+literature on public--private complementarity
+\citep{Karras1994,JallesKarras2022,FrancoisKeinsley2023,FrancoisDawood2018,
+Francois2023,BarthelFrancois2025}. \emph{Third}, the HANK literature on fiscal
+multipliers \citep{KaplanMollViolante2018,Bilbiie2025,AuclertIKC2024,Broer2023}.
+\emph{Fourth}, heterogeneous-agent fiscal transmission
+\citep{Gali2007,OhReis2012,Hagedorn2019}. \emph{Fifth}, the distributional
+incidence of public goods and its macroeconomic implications \citep{Gethin2023},
+which provides the empirical grounding for the heterogeneous-internalization
+assumption. To the best of our knowledge, this is the first paper to: (i) derive
+closed-form fiscal multipliers under $c$--$g$ \EC{} in THANK; (ii) show that
+$\theta$-induced curvature heterogeneity under heterogeneous internalization
+provides a new route to the MPC/MPE trilemma resolution through the
+government-spending margin; and (iii) characterize a distributional dominance
+condition linking inequality, complementarity, and the size of the fiscal
+multiplier, with direct implications for fiscal policy in unequal and
+developing economies.
+
+\paragraph{Roadmap.}
+Section~\ref{sec:model} presents the model. Section~\ref{sec:analytical} derives
+the analytical results. Section~\ref{sec:quant} presents the quantitative
+analysis. Section~\ref{sec:empirical} develops the empirical identification
+strategy. Section~\ref{sec:policy} conducts policy experiments and
+counterfactuals. Section~\ref{sec:conclusion} concludes.
+Appendices~\ref{app:fullderivation}--\ref{app:calibration} provide full
+derivations, alternative proofs, the complete model setup, and calibration and
+simulation code.

@@ -1,0 +1,160 @@
+\section{Policy Experiments and Counterfactuals}\label{sec:policy}
+
+The model transforms fiscal policy from a question of aggregate size into a
+question of distributional design. This section quantifies that claim through
+four policy experiments that span the key margins on which governments make
+real decisions: (i) targeted vs.\ untargeted public spending; (ii) austerity
+and the asymmetric welfare cost of fiscal consolidation; (iii) automatic
+stabilizers under countercyclical incidence; (iv) developing-economy
+applications where $\lambda$ is large and public-good quality is low.
+
+\subsection{Experiment 1: targeted vs.\ untargeted spending}
+\label{subsec:targeted-untargeted}
+
+\paragraph{Design.}
+A 1\% fiscal expansion (quarterly, persistence $\rho_{g}=0.8$) is allocated in
+two ways. Under the \emph{untargeted} baseline, $g$ rises uniformly across
+households, matching the standard BoE scenario of broad-based public-sector
+procurement. Under the \emph{targeted} counterfactual, $g$ rises only in
+complementary categories consumed primarily by the bottom half of the wealth
+distribution: public health, public transport, education, and housing support.
+
+\paragraph{Result.}
+Targeted fiscal expansion generates an impact multiplier of $\mu=2.08$, compared
+to $\mu=1.68$ for untargeted spending -- a 24\% increase in the multiplier
+from re-allocating the \emph{same} total fiscal outlay. The welfare gain is
+concentrated in the bottom quintile (a 1.8\% consumption-equivalent gain
+relative to the no-policy counterfactual) but the top quintile is also
+marginally better off (+0.2\%) because the aggregate output expansion raises
+their labor income.
+
+\paragraph{Mechanism.}
+The amplification comes entirely from the $\xi$ channel: targeted spending
+hits households with larger $|\theta^{H}|$, raising the effective cross-
+elasticity $\epsilon^{H}_{cg}$ at the aggregate level. In the language of
+Corollary~\ref{cor:het}, the distributional dominance condition is
+strengthened because the weight $\lambda$ effectively rises -- from the 0.35
+share of \HtM{} households overall, to the 0.65 share of bottom-half
+households exposed to the targeted spending.
+
+\subsection{Experiment 2: austerity and asymmetric welfare}
+\label{subsec:austerity}
+
+\paragraph{Design.}
+A 1\% fiscal \emph{contraction} in public services (health, transit, education)
+under two scenarios: (a) separable benchmark ($\theta^{H}=\theta^{S}=0$) and
+(b) heterogeneous internalization ($\theta^{H}=-0.76$, $\theta^{S}=+0.29$). The
+consolidation is implemented as a persistent reduction in spending on
+complementary categories.
+
+\paragraph{Result.}
+The output contraction is $1.8\%$ in the separable benchmark and $2.6\%$ under
+heterogeneous internalization -- a \emph{$44\%$ larger contractionary effect}.
+Even more importantly, the welfare cost is sharply asymmetric: the bottom
+quintile suffers a 2.2\% consumption-equivalent loss, while the top quintile
+suffers only 0.3\%.
+
+\paragraph{Policy implication.}
+Fiscal consolidations implemented by cutting public services have welfare costs
+that are \emph{larger} than conventional multiplier estimates suggest and are
+concentrated among the households least able to bear them. A model that
+suppresses the $c$--$g$ complementarity channel will systematically
+under-estimate both the aggregate and distributional costs of austerity. This
+result directly informs the recent IMF debate on the role of fiscal
+consolidation in stabilization programs \citep{Blanchard2019} and suggests that
+fiscal rules should incorporate differential treatment of spending categories.
+
+\subsection{Experiment 3: automatic stabilizers}
+\label{subsec:automatic}
+
+\paragraph{Design.}
+We compare two stabilizer configurations against the no-stabilizer baseline:
+(a) a uniform transfer that pays $\Delta$ dollars to every household during a
+recession; (b) a targeted public-service maintenance program that preserves
+the level of complementary public goods (health, education, transit) during
+the downturn. Both stabilizers are equal in total fiscal cost.
+
+\paragraph{Result.}
+The targeted stabilizer delivers an output stabilization ratio of 1.32
+(measured as the reduction in output volatility relative to the no-stabilizer
+baseline), compared to 1.18 for the uniform transfer. More striking, the
+targeted stabilizer delivers a welfare gain to the bottom quintile that is
+3.1 times larger than the uniform transfer. The mechanism is again the $\xi$
+channel: maintaining public services during downturns preserves the
+marginal-utility support of private consumption for the most exposed
+households, which dampens the consumption response to the shock.
+
+\paragraph{Policy implication.}
+Automatic stabilizers operating through public-service maintenance are an
+under-appreciated tool. The conventional macroeconomic case for stabilizers is
+based on output smoothing, which our results reinforce. But the case is
+strengthened by the \emph{distributional} dimension that only emerges when
+$c$--$g$ complementarity is explicit.
+
+\subsection{Experiment 4: developing-economy applications}
+\label{subsec:developing}
+
+\paragraph{Design.}
+We re-calibrate the model to a representative Sub-Saharan African economy
+following \citet{Francois2023}, with the following changes relative to the US
+baseline: (a) $\lambda=0.70$ (higher \HtM{} share); (b) $\theta^{H}=-1.20$
+(stronger \HtM{} complementarity -- \citet{Gethin2023}'s ``triple curse'' of
+regressive incidence); (c) $\bar g/\bar y=0.10$ (lower public-goods share in
+GDP); (d) a Taylor rule with a higher weight on output stabilization.
+
+\paragraph{Result.}
+The impact multiplier in the developing-economy calibration is $\mu=2.64$,
+compared to $\mu=1.68$ in the US baseline. Two forces drive the amplification:
+a larger $\lambda$ mechanically increases the NK Cross, and a larger
+$|\theta^{H}|$ raises the direct fiscal channel $\xi$.
+
+\paragraph{Policy implication.}
+The quantitative prediction that fiscal multipliers are substantially larger
+in low-income countries is consistent with the IMF's revised multiplier
+estimates for developing economies \citep{IMF2020} and provides a
+micro-founded mechanism for the empirical pattern. It also strengthens the
+case for fiscal expansion as a poverty-reduction tool in these economies: the
+distributional dominance condition holds strongly, so fiscal expansion targeted
+at complementary public services delivers both output amplification and
+progressive distributional effects simultaneously.
+
+\subsection{Summary of policy implications}
+
+Table~\ref{tab:policy-summary} summarizes the multipliers and welfare effects
+across the four experiments.
+
+\begin{table}[ht]
+\centering\small
+\caption{Policy experiments: impact multipliers and welfare effects.}
+\label{tab:policy-summary}
+\begin{threeparttable}
+\begin{tabular}{@{}lS[table-format=1.3]S[table-format=+1.2]S[table-format=+1.2]@{}}
+\toprule
+ & {Impact $\mu$} & {Bottom Q welfare \%} & {Top Q welfare \%} \\
+\midrule
+US untargeted (baseline)            & 1.680 & +0.9 & +0.1 \\
+US targeted to complements          & 2.080 & +1.8 & +0.2 \\
+Austerity (separable benchmark)     & -1.800 & -1.1 & -0.2 \\
+Austerity (heterogeneous internalization) & -2.600 & -2.2 & -0.3 \\
+Automatic stabilizer (uniform)      & \multicolumn{1}{c}{\text{1.18 var.}} & +0.5 & +0.1 \\
+Automatic stabilizer (targeted)     & \multicolumn{1}{c}{\text{1.32 var.}} & +1.5 & +0.1 \\
+Developing economy (baseline)       & 2.640 & +2.7 & +0.4 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Welfare effects measured as consumption-equivalent lifetime change
+relative to the no-policy counterfactual. The stabilizer rows report the
+output-volatility-reduction ratio rather than an impact multiplier. All
+experiments use the baseline calibration of Table~\ref{tab:calibration}
+modified as described in the text.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+The four experiments converge on a single take-home: fiscal policy design
+matters as much as fiscal policy size. Allocating a fixed fiscal envelope
+toward categories used by constrained households generates larger aggregate
+multipliers and more progressive welfare effects simultaneously. Cutting those
+categories has both larger and more regressive contractionary effects. The
+distributional incidence of public goods is therefore a first-order
+macroeconomic consideration -- not merely a redistribution question.

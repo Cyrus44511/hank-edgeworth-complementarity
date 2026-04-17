@@ -1,0 +1,70 @@
+\section{Derivation Under General Non-Separable Preferences}\label{app:general-nonsep}
+
+This appendix provides the full derivation of $\chi$ and $\xi$ under
+Assumption~\ref{asm:general}, working with the general utility elasticities
+$(\epsilon^{j}_{cc},\epsilon^{j}_{cg})$ rather than the linear effective
+consumption parameterization.
+
+\subsection{Linearizing the intratemporal condition}\label{app:intra-general}
+The intratemporal FOC $-U^{j}_{n}(c^{j},g,n^{j})=w_{t}U^{j}_{c}(c^{j},g,n^{j})$.
+Log-linearizing around steady state, using
+$U^{j}_{cc}=-(\bar U^{j}_{c}/\bar c)\epsilon^{j}_{cc}$ and
+$U^{j}_{cg}=-(\bar U^{j}_{c}/\bar g)\epsilon^{j}_{cg}$:
+\begin{equation}\label{eq:C-intra}
+  \phi\hat n^{j}_{t}=\hat w_{t}-\epsilon^{j}_{cc}\hat c^{j}_{t}-\epsilon^{j}_{cg}\hat g_{t}.
+\end{equation}
+Under Assumption~\ref{asm:linear}, $\epsilon^{j}_{cc}=\sigma\alpha^{j}$ and
+$\epsilon^{j}_{cg}=\sigma\Gamma^{j}$.
+
+\subsection{Linearizing the saver Euler equation}\label{app:euler-general}
+The Euler equation $U^{S}_{c}(c^{S}_{t},g_{t})=\beta R_{t}\mathbb{E}_{t}U^{S}_{c}(c^{S}_{t+1},g_{t+1})$.
+Log-linearizing:
+\[
+  -\epsilon^{S}_{cc}\hat c^{S}_{t}-\epsilon^{S}_{cg}\hat g_{t}
+  =\hat r_{t}-\mathbb{E}_{t}[\epsilon^{S}_{cc}\hat c^{S}_{t+1}+\epsilon^{S}_{cg}\hat g_{t+1}].
+\]
+Dividing by $-\epsilon^{S}_{cc}$:
+\begin{equation}\label{eq:C-euler}
+  \hat c^{S}_{t}=\mathbb{E}_{t}\hat c^{S}_{t+1}-\frac{1}{\epsilon^{S}_{cc}}\hat r_{t}
+  -\frac{\epsilon^{S}_{cg}}{\epsilon^{S}_{cc}}(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}).
+\end{equation}
+
+\subsection{Verification: linear effective consumption}\label{app:verify-linear}
+Under Assumption~\ref{asm:linear} with $\epsilon^{S}_{cc}=\sigma\alpha^{S}$
+and $\epsilon^{S}_{cg}=\sigma\Gamma^{S}$:
+\[
+  \hat c^{S}_{t}=\mathbb{E}_{t}\hat c^{S}_{t+1}-\frac{1}{\sigma\alpha^{S}}\hat r_{t}
+    -\frac{\Gamma^{S}}{\alpha^{S}}(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}),
+\]
+which matches \eqref{eq:euler-linear}.
+
+\subsection{General $\chi$ and $\xi$: full derivation}\label{app:chi-xi-general}
+Starting from \eqref{eq:C-intra} for type $H$ and the $H$ budget constraint
+$\hat c^{H}_{t}=\hat w_{t}(1-\tau_{D}/\lambda)+\hat n^{H}_{t}-\hat t^{H}_{t}$,
+substituting the labor FOC and solving:
+\begin{equation}\label{eq:C-hmc-eq}
+  (\phi+\epsilon^{H}_{cc})\hat c^{H}_{t}=K\hat w_{t}-(\epsilon^{H}_{cg}+\mu\phi/\lambda)\hat g_{t}.
+\end{equation}
+The aggregated wage equation is
+\begin{equation}\label{eq:C-wage}
+  \hat w_{t}=(\phi+\epsilon^{S}_{cc})\hat c_{t}+\lambda\chi(\epsilon^{H}_{cc}-\epsilon^{S}_{cc})\hat c_{t}
+  +\lambda(\epsilon^{H}_{cg}+\epsilon^{S}_{cg})\hat g_{t}+\cdots
+\end{equation}
+(details analogous to Appendix~\ref{app:wage}). Matching coefficients:
+\[
+  \chi=\frac{K(\phi+\epsilon^{S}_{cc})}{D},\qquad
+  D=(\phi+\epsilon^{H}_{cc})-K\lambda(\epsilon^{H}_{cc}-\epsilon^{S}_{cc}),
+\]
+\[
+  \xi=\frac{K[\phi+\lambda\epsilon^{H}_{cg}+(1-\lambda)\epsilon^{S}_{cg}]-\epsilon^{H}_{cg}-\mu\phi/\lambda}{D}.
+\]
+
+\subsection{The separability of $\chi$ from $\epsilon^{j}_{cg}$}\label{app:chi-indep}
+A key feature of the general expression is that $\chi$ depends only on
+$\epsilon^{j}_{cc}$, \emph{not} on $\epsilon^{j}_{cg}$. Intuitively, income
+cyclicality measures how \HtM{} income co-moves with aggregate output, which
+is determined by the labor-supply-wage response governed by own-consumption
+curvature. Non-separability between $c$ and $g$ enters only through the direct
+fiscal channel $\xi$, which is determined by cross-elasticities. This
+separation is a direct consequence of linearization and is a general property
+of the class of non-separable preferences considered.

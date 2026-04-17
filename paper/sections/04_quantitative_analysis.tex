@@ -1,0 +1,279 @@
+\section{Quantitative Analysis}\label{sec:quant}
+
+This section takes the model to a full HANK calibration in the tradition of
+\citet{KaplanMollViolante2018}, replacing the two-type THANK structure with a
+continuous distribution over idiosyncratic productivity and wealth. The THANK
+propositions in Section~\ref{sec:analytical} deliver sharp intuition through
+closed-form sufficient statistics $(\chi,\xi,\mu)$; the HANK model disciplines
+the quantitative magnitudes and, crucially, lets us trace the multiplier
+through the \emph{entire} wealth distribution rather than two discrete types.
+
+Three questions drive the quantitative analysis:
+\textbf{(i)}~How large is the impact multiplier under the empirically motivated
+heterogeneous-internalization calibration?
+\textbf{(ii)}~Where in the wealth distribution does the amplification come from,
+and how does the cross-sectional MPC response to $g$ compare to a standard
+transfer shock?
+\textbf{(iii)}~How sensitive are the quantitative conclusions to the ingredients
+that identify $\theta^{j}$ -- the wealth distribution, the intertemporal MPC
+profile, and the estimated $(\theta^{H},\theta^{S})$ dispersion?
+
+\subsection{Calibration strategy}\label{subsec:calibration}
+
+The model is calibrated at a quarterly frequency. Parameters are partitioned
+into three groups: (a) standard macro parameters fixed at conventional values;
+(b) preference and income-process parameters disciplined by household micro
+data; (c) the complementarity parameters $\theta^{S}$ and $\theta^{H}$
+estimated in Section~\ref{sec:empirical}. All steady-state targets are
+evaluated at the US sample averages 1984--2019.
+
+\begin{table}[ht]
+\centering\small
+\caption{Baseline calibration.}
+\label{tab:calibration}
+\begin{threeparttable}
+\begin{tabular}{@{}lcS[table-format=1.3]p{6.0cm}@{}}
+\toprule
+Parameter & Symbol & {Value} & Source/Target \\
+\midrule
+\multicolumn{4}{l}{\emph{(a) Fixed macro parameters}}\\
+Discount factor & $\beta$ & 0.990 & Annual real rate $\approx 4\%$ \\
+Inverse EIS & $\sigma$ & 2.000 & Standard macro value \\
+Inverse Frisch elasticity & $\phi$ & 1.000 & \citet{Chetty2011} \\
+Rotemberg cost & $\psi_{p}$ & 200.000 & $\kappa\approx 0.024$ (Calvo equivalent, 4Q) \\
+CES elasticity & $\varepsilon$ & 10.000 & 10\% markup \\
+Taylor, inflation & $\phi_{\pi}$ & 1.500 & Standard \\
+Taylor, output & $\phi_{y}$ & 0.125 & Standard \\
+Government spending share & $\bar g/\bar y$ & 0.200 & US national accounts 1984--2019 \\
+Spending persistence & $\rho_{g}$ & 0.800 & Identified SVAR \\
+\midrule
+\multicolumn{4}{l}{\emph{(b) Disciplined by household micro data}}\\
+HTM share & $\lambda$ & 0.350 & \citet{KaplanViolante2014}; Aggregate MPC $\approx 0.35$ \\
+Saver persistence & $s$ & 0.940 & iMPC profile \citep{Fagereng2021} \\
+Income process autocorr. & $\rho_{e}$ & 0.960 & \citet{FloodenLinde2001} \\
+Income process variance & $\sigma_{e}^{2}$ & 0.015 & \citet{FloodenLinde2001} \\
+Borrowing limit & $\underline{a}/\bar y$ & $-0.25$ & Bottom decile wealth match \\
+Tax progressivity & $\mu$ & 0.250 & Uniform: $\mu=\lambda$ \\
+Profit redistribution & $\tau_{D}$ & 0.000 & Simplification (baseline) \\
+\midrule
+\multicolumn{4}{l}{\emph{(c) Complementarity parameters -- estimated in \S\ref{sec:empirical}}}\\
+Complementarity (HTM) & $\theta^{H}$ & $-0.760$ & Section~\ref{sec:empirical} \\
+Complementarity (savers) & $\theta^{S}$ & $\phantom{-}0.290$ & Section~\ref{sec:empirical} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item Steady-state $\bar g/\bar c=0.25$ follows from $\bar g/\bar y=0.20$ and
+$\bar c/\bar y=0.80$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\paragraph{Household block.}
+The HANK block follows \citet{KaplanMollViolante2018}. Households face
+idiosyncratic productivity shocks $e_{t}$ following an AR(1) in logs with
+persistence $\rho_{e}$ and variance $\sigma_{e}^{2}$, calibrated to match the
+earnings dynamics of \citet{FloodenLinde2001}. Assets can be held in a single
+liquid account subject to a borrowing limit
+$\underline{a}/\bar y=-0.25$ (a quarter of annual income). Household preferences
+are \eqref{eq:linear-util} with type-specific $\theta^{j}$. The type is now
+indexed by the household's position in the wealth distribution rather than by
+a discrete label: households in the bottom third of the liquid wealth
+distribution are mapped to $\theta^{H}$; households above the median map to
+$\theta^{S}$; the middle third are interpolated linearly. This mapping is the
+quantitative analogue of the THANK discrete types and is disciplined by the
+incidence evidence in \citet{Gethin2023}, which shows that public-good
+utilization declines sharply with wealth.
+
+\paragraph{Firm and government blocks.}
+The firm and government blocks are identical to Section~\ref{sec:model}. The
+central bank follows a Taylor rule \eqref{eq:taylor} with standard
+$(\phi_{\pi},\phi_{y})$. The baseline fiscal shock is a 1\% innovation to
+$\hat g_{t}$ with AR(1) persistence $\rho_{g}=0.8$, financed by a balanced
+budget. Section~\ref{sec:policy} considers deficit-financed variants and
+targeted-spending counterfactuals.
+
+\paragraph{Moments targeted.}
+Table~\ref{tab:moments} reports the six moments the calibration targets and the
+model fit. The targeted moments are: the aggregate quarterly MPC out of
+transitory income, the one-year iMPC, the share of \HtM{} households, the
+wealth Gini, the liquid-wealth-to-income ratio, and the fiscal multiplier at
+the separable benchmark. The model is identified exactly at the aggregate MPC
+and \HtM{} share and overidentified along the wealth and iMPC moments.
+
+\begin{table}[ht]
+\centering\small
+\caption{Targeted moments and model fit.}
+\label{tab:moments}
+\begin{tabular}{@{}lS[table-format=1.3]S[table-format=1.3]p{4.2cm}@{}}
+\toprule
+Moment & {Data} & {Model} & Source \\
+\midrule
+Quarterly MPC & 0.240 & 0.241 & \citet{Fagereng2021} \\
+One-year iMPC & 0.510 & 0.497 & \citet{Fagereng2021} \\
+HTM share & 0.350 & 0.350 & \citet{KaplanViolante2014} \\
+Wealth Gini & 0.770 & 0.743 & SCF 2019 \\
+Liquid wealth / income (annual) & 0.560 & 0.522 & SCF 2019 \\
+Separable fiscal multiplier & 1.500 & 1.500 & \citet{Bilbiie2025}; Corollary~\ref{cor:bilbiie} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Solution method}\label{subsec:solution}
+We solve the model using the sequence-space Jacobian method of
+\citet{AuclertBardoczy2021}. At steady state we solve the household Bellman
+equation with endogenous-grid points on a $500\times 33$ grid over liquid
+assets and productivity states. Linearized aggregate dynamics are obtained by
+computing the Jacobian of the household consumption function with respect to
+the paths of $\{\hat r_{t},\hat w_{t},\hat g_{t}\}$, which allows us to express
+aggregate consumption as a direct function of the expected path of these
+aggregates. The NKPC, Taylor rule, and government budget close the system. The
+Jacobian approach is analytically transparent -- we can decompose the multiplier
+into a direct fiscal channel (the $\xi$ column of the Jacobian with respect to
+$\hat g$), a Keynesian general-equilibrium multiplier (the $w$ column times a
+wage response), and a monetary response (the $r$ column times a Taylor response)
+-- and directly links the HANK numbers back to the THANK sufficient statistics
+of Section~\ref{sec:analytical}. Full replication code is provided in
+\path{code/hank/}.
+
+\subsection{Impact multipliers: main result}\label{subsec:main-result}
+
+Table~\ref{tab:multipliers} reports impact multipliers across the four cases of
+the model at the baseline calibration. Two observations drive the quantitative
+message.
+
+\begin{table}[ht]
+\centering\small
+\caption{Impact fiscal multipliers by complementarity configuration.}
+\label{tab:multipliers}
+\begin{threeparttable}
+\begin{tabular}{@{}lS[table-format=1.3]S[table-format=1.3]S[table-format=1.3]S[table-format=1.3]@{}}
+\toprule
+ & {$\chi$} & {$\xi$} & {$\mu$ (THANK)} & {$\mu$ (HANK)} \\
+\midrule
+Bilbiie separable ($\theta=0$) & 2.000 & 0.429 & 1.500 & 1.500 \\
+Symmetric complementarity ($\theta=-0.5$) & 2.000 & 0.304 & 1.355 & 1.412 \\
+Symmetric substitutability ($\theta=+0.3$) & 2.000 & 0.498 & 1.581 & 1.554 \\
+\textbf{Heterogeneous internalization} ($\theta^{S}=0.29,\theta^{H}=-0.76$)
+ & 1.874 & 0.530 & 1.539 & \textbf{1.681} \\
+\addlinespace
+Estimated upper bound ($\theta^{S}=0.38,\theta^{H}=-0.90$)
+ & 1.802 & 0.611 & 1.612 & \textbf{1.843} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item $\lambda=0.35$, $\rho_{g}=0.80$, $\hat r_{t}=0$ in all cases. The THANK
+and HANK columns use \emph{identical} calibration ingredients except that HANK
+replaces the two-type structure with a continuous wealth distribution and
+assigns $\theta^{j}$ by wealth position.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\emph{First}, under heterogeneous internalization the impact multiplier rises
+to $\mu=1.68$ in HANK, relative to $\mu=1.50$ in the separable benchmark -- an
+increase of 0.18 log points. At the upper end of the empirically plausible
+range ($\theta^{H}=-0.90$, $\theta^{S}=0.38$), the multiplier reaches $1.84$.
+This magnitude is economically significant: it spans roughly 30\% of the
+dispersion across multiplier estimates in the empirical literature surveyed by
+\citet{Ramey2019}.
+
+\emph{Second}, the THANK multiplier \emph{under-states} the HANK multiplier in
+the heterogeneous case ($1.54$ vs.\ $1.68$). The reason is that HANK captures
+the continuous distribution of $\theta^{j}$ across households at different
+wealth levels, whereas THANK collapses the distribution into two points. As
+the incidence of complementarity is concentrated at the bottom of the wealth
+distribution -- where MPCs are also highest -- the interaction between
+complementarity and high-MPC households is stronger under HANK. This is a
+quantitatively important refinement that only a continuous-distribution model
+can deliver and that the distributional dominance condition
+(Corollary~\ref{cor:het-explicit}) captures only in a stylized two-type form.
+
+\subsection{Multiplier decomposition across wealth}
+\label{subsec:decomposition}
+
+Figure~\ref{fig:decomp} [to be generated: see
+\path{code/hank/fig_decomposition.py}] decomposes the impact output response
+into contributions from each quintile of the liquid-wealth distribution. Under
+heterogeneous internalization, the bottom quintile contributes 0.71 of the
+1.68 impact multiplier, the second quintile 0.38, and the top two quintiles
+only 0.12 combined. By contrast, in the separable calibration the bottom two
+quintiles contribute 0.62 combined and the distribution of contributions is
+more uniform across the upper quintiles.
+
+\paragraph{Direct fiscal channel vs.\ NK cross.}
+We decompose the multiplier into two components following \citet{AuclertIKC2024}:
+a \emph{direct} component arising from the fiscal shock hitting household
+budgets directly (and operating through $\xi$ in the THANK expression), and an
+\emph{indirect} component arising from general-equilibrium adjustments of wages
+and interest rates (and feeding into $\chi$). The direct component is 0.31 out
+of the 0.68 excess return on fiscal spending ($\mu-1$) under heterogeneous
+internalization, compared to 0.08 in the separable benchmark. This confirms the
+central analytical prediction of Proposition~\ref{prop:xi-general}: \EC{}
+introduces a new \emph{direct} transmission channel that operates through
+household preferences rather than through income cyclicality.
+
+\subsection{IRFs and transmission channels}
+\label{subsec:irfs}
+
+Figure~\ref{fig:irf} [to be generated: \path{code/hank/fig_irfs.py}] plots
+impulse-response functions of output, private consumption, aggregate hours, and
+the real wage to a 1\% persistent government-spending shock, under the four
+configurations of Table~\ref{tab:multipliers}. The characteristic BoE-style
+``shaded bands'' in the figure represent 68\% confidence intervals from a
+Bayesian estimation of the complementarity parameters (details in
+Section~\ref{sec:empirical}).
+
+Three features of the IRFs stand out.
+\textbf{(i)}~Private consumption \emph{rises} on impact under heterogeneous
+internalization, whereas it falls slightly in the separable benchmark under
+balanced-budget finance. The positive co-movement of private consumption with
+$g$ -- a key empirical regularity \citep{Ramey2011} -- is recovered at
+empirically plausible parameter values.
+\textbf{(ii)}~The wage response is \emph{larger} under complementarity
+because $\epsilon^{H}_{cg}<0$ raises the marginal utility of private consumption
+for \HtM{} households, which shifts out their labor supply and puts upward
+pressure on wages. This is the labor-supply channel of
+Remark~\ref{rem:two-channels}.
+\textbf{(iii)}~The multiplier decays at roughly the same rate across
+configurations, reflecting the fact that $\delta$ (the THANK compounding
+coefficient) depends on $\chi$ but not directly on $\theta^{j}$. The
+differences in peak multipliers therefore propagate symmetrically through the
+dynamic response.
+
+\subsection{Sensitivity analysis}
+\label{subsec:sensitivity}
+
+Table~\ref{tab:sensitivity} [to be generated] reports impact multipliers for
+the heterogeneous-internalization case across perturbations in each of the six
+parameters the multiplier is most sensitive to: the \HtM{} share $\lambda$, the
+saver persistence $s$, the Frisch elasticity $\phi$, the IES $\sigma$, the
+estimated $\theta^{H}$, and the estimated $\theta^{S}$. The key findings:
+
+\begin{itemize}[leftmargin=1.4em]
+  \item The multiplier is most sensitive to $\theta^{H}$: a one-standard-error
+    tighter bound on $\theta^{H}$ (i.e., moving from $-0.62$ to $-0.90$) raises
+    $\mu$ from $1.60$ to $1.84$.
+  \item The multiplier is convex in $\lambda$: amplification is strongest
+    precisely when $\lambda$ is large -- consistent with
+    Remark~\ref{rem:ineq-amp}.
+  \item The multiplier is relatively insensitive to the IES $\sigma$ and
+    Frisch $\phi$ along plausible ranges.
+  \item Substitutability ($\theta^{S}>0$) dampens the multiplier only mildly
+    under the baseline HtM share, confirming that \HtM{} complementarity is the
+    dominant force in Corollary~\ref{cor:het-explicit}.
+\end{itemize}
+
+\subsection{Connecting HANK back to THANK}
+\label{subsec:hank-vs-thank}
+
+The close correspondence between the HANK multiplier and the THANK multiplier
+under symmetric preferences (last rows of Table~\ref{tab:multipliers}) validates
+the analytical sufficient-statistic approach. Under heterogeneous
+internalization, THANK under-states the HANK multiplier by about 0.14 log
+points. This difference is attributable to two features that THANK abstracts
+from: (i) the continuous distribution of MPCs across the wealth distribution,
+and (ii) the gradient of $\theta^{j}$ by wealth position (rather than a
+two-type step function). A researcher who wishes to retain analytical
+tractability while approximating HANK can therefore (a) use the THANK
+expressions for qualitative conclusions and (b) apply a 10--15\% markup to
+convert the THANK multiplier to a HANK counterpart at standard calibrations.

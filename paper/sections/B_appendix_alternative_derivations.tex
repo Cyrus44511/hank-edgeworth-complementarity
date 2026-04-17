@@ -1,0 +1,56 @@
+\section{Alternative Derivations of \texorpdfstring{$\chi$ and $\xi$}{chi and xi}}\label{app:alt-derivations}
+
+This appendix provides three alternative derivations of the key sufficient
+statistics $\chi$ and $\xi$ that yield the same expressions by different
+routes. The methods illuminate different aspects of the model structure and
+are useful for researchers who wish to extend the framework.
+
+\subsection{Why three methods give the same answer}\label{app:why-three}
+The conjecture $\hat c^{H}_{t}=\chi\hat c_{t}+\xi\hat g_{t}$ is the unique
+solution to a system of three equilibrium conditions: the \HtM{} budget
+constraint, the real-wage aggregation, and the production function
+$\hat y_{t}=\hat c_{t}+\hat g_{t}$. Any method that correctly exploits this
+system must recover the same $(\chi,\xi)$. The three methods differ in how
+they organize the algebra:
+(1) \emph{Coefficient matching}: used in Appendix~\ref{app:fullderivation}.
+(2) \emph{Matrix system}: expresses the equilibrium conditions as a linear
+system and solves by inversion.
+(3) \emph{Direct substitution}: substitutes the wage directly into the \HtM{}
+budget constraint and solves for $\hat c^{H}_{t}$ as a function of $\hat c_{t}$
+and $\hat g_{t}$.
+
+\subsection{Method 1: coefficient matching (main text)}\label{app:method-1}
+Reproduced in Appendix~\ref{app:fullderivation} for completeness. The key
+algebraic step is matching the coefficients of $\hat c_{t}$ and $\hat g_{t}$
+in the equation $(\phi+\sigma\alpha^{H})\hat c^{H}_{t}=KW_{c}\hat c_{t}+[KW_{g}-\sigma\Gamma^{H}-\mu\phi/\lambda]\hat g_{t}$.
+
+\subsection{Method 2: matrix system}\label{app:method-2}
+Write the system as $A\mathbf{x}=B\mathbf{g}$ where $\mathbf{x}=(\hat c^{H},\hat c^{S},\hat w,\hat n)'$ and $\mathbf{g}=(\hat c_{t},\hat g_{t})'$:
+\[
+  A=\begin{pmatrix}
+  \phi+\sigma\alpha^{H} & 0 & -K & 0\\
+  0 & \phi+\sigma\alpha^{S} & -1 & 0\\
+  0 & 0 & 1 & -\phi\\
+  -\lambda & -(1-\lambda) & 0 & 1
+  \end{pmatrix},
+\]
+and solve for $\hat c^{H}=f(\hat c,\hat g)$. The $\chi$ and $\xi$ expressions
+match those in the main text.
+
+\subsection{Method 3: direct substitution}\label{app:method-3}
+The \HtM{} consumption $\hat c^{H}_{t}$ is determined by combining the \HtM{}
+budget constraint with the real-wage equation. Direct substitution involves:
+(i) solving the wage aggregation for $\hat w_{t}$ as a function of
+$\hat c_{t},\hat g_{t},\hat c^{H}_{t}$; (ii) substituting into the \HtM{}
+budget \eqref{eq:A-htm-2}; (iii) solving for $\hat c^{H}_{t}$. The result
+coincides with Methods 1 and 2.
+
+\subsection{What $\chi$ really is: income cyclicality}\label{app:chi-meaning}
+Having derived $\chi$ three ways, it is worth emphasizing the economic
+interpretation. $\chi$ is the elasticity of \HtM{} consumption with respect to
+aggregate output, holding government spending fixed:
+$\chi=\partial\hat c^{H}/\partial\hat y\bigm|_{\hat g=0}$. Since \HtM{} consume
+their income, $\chi$ is also the elasticity of \HtM{} income to aggregate
+output -- the ``income cyclicality'' terminology. Under countercyclical
+inequality ($\chi>1$), \HtM{} income rises more than proportionally with
+aggregate output, amplifying the fiscal multiplier through the NK Cross.

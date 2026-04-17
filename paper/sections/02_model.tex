@@ -1,0 +1,259 @@
+\section{Model}\label{sec:model}
+
+We build on the tractable heterogeneous-agent New Keynesian (THANK) framework
+of \citet{Bilbiie2021} and \citet{Bilbiie2025}. The economy is populated by a
+continuum of households of measure one, a continuum of monopolistically
+competitive firms, and a government. Time is discrete and indexed by
+$t=0,1,2,\dots$.
+
+\paragraph{Relationship to TANK, THANK, and full HANK.}
+It is useful to situate our framework relative to three strands of the
+heterogeneous-agent literature before proceeding, as they differ in important
+ways that bear on our results.
+
+The Two-Agent New Keynesian (TANK) model, developed by \citet{Gali2007} and
+\citet{Bilbiie2021}, populates the economy with two permanent household types:
+unconstrained savers who smooth consumption according to the permanent-income
+hypothesis, and \HtM{} households who consume all their income each period.
+Household type is fixed and deterministic -- a household is either always a
+saver or always \HtM. TANK is highly tractable and delivers clean analytical
+results, but it abstracts from three empirically important features:
+idiosyncratic income risk, precautionary saving, and the possibility of
+transitioning between constrained and unconstrained states over the lifecycle.
+
+The THANK model of \citet{Bilbiie2025} extends TANK by introducing stochastic
+switching between states. In each period, a saver faces a positive probability
+of becoming \HtM{} next period, and vice versa. This seemingly small
+modification has three important consequences. First, it introduces genuine
+idiosyncratic risk -- even an unconstrained saver today may be constrained
+tomorrow. Second, because this risk is uninsurable under incomplete markets, it
+generates a precautionary saving motive that makes savers accumulate more wealth
+than the pure permanent-income hypothesis would predict, producing more
+realistic MPCs. Third, it delivers empirically realistic intertemporal marginal
+propensities to consume (iMPCs) that match the micro evidence on how households
+spread spending responses over time \citep{Fagereng2021}. THANK thus serves as
+an analytically tractable bridge between the simple TANK intuition and the full
+quantitative HANK model.
+
+The full HANK model -- as in \citet{KaplanMollViolante2018} -- replaces the two
+discrete household types with a continuous distribution of households that
+differ in wealth and idiosyncratic productivity. The wealth distribution is
+endogenously determined by household saving decisions under incomplete markets.
+This framework is quantitatively rich and matches the empirical wealth
+distribution precisely, but it requires numerical solution and sacrifices the
+analytical tractability needed to derive closed-form multiplier expressions.
+
+Our strategy exploits the complementary strengths of these frameworks. We use
+THANK to derive the analytical propositions in Section~\ref{sec:analytical},
+where the stochastic switching structure allows us to capture idiosyncratic
+risk and precautionary saving while retaining closed-form solutions. We then
+take the model to a full HANK calibration in Section~\ref{sec:quant}, where the
+continuous wealth distribution disciplines the quantitative magnitudes and
+allows us to study how the complementarity channel varies across the wealth
+distribution -- a dimension that THANK, by construction, cannot speak to.
+
+\subsection{Households}\label{subsec:households}
+There are two types of households: unconstrained savers (type $S$) and \HtM{}
+households (type $H$). A fraction $\lambda\in(0,1)$ of households are \HtM{} in
+any given period, and the remaining fraction $1-\lambda$ are savers. Households
+switch between states stochastically: a fraction $s\in(0,1)$ of savers remain
+savers next period, and a fraction $h\in(0,1)$ of \HtM{} households remain
+\HtM{} next period. In steady state, the fraction of \HtM{} households is
+$\lambda=(1-s)/[(1-s)+(1-h)]$, determined by the switching probabilities. This
+switching structure introduces idiosyncratic risk and precautionary saving
+motives absent in TANK, key features of quantitative HANK models
+\citep{Bilbiie2025}.
+
+\subsubsection*{Preferences -- general non-separable specification.}
+Each household type $j\in\{S,H\}$ has preferences over private consumption
+$c^{j}_{t}$, government spending $g_{t}$, and labor $n^{j}_{t}$ represented by a
+general twice-continuously-differentiable utility function
+$U^{j}(c^{j}_{t},g_{t},n^{j}_{t})$. We impose: $U^{j}_{c}>0$, $U^{j}_{cc}<0$
+(positive, diminishing marginal utility of consumption); $U^{j}_{n}<0$,
+$U^{j}_{nn}<0$ (disutility of labor); and $U^{j}_{cn}=0$ (separability between
+consumption and labor, standard in NK models). The key restriction governing
+the fiscal-transmission channel is
+\begin{equation}\label{eq:Ucg-signs}
+  U_{cg}^{j}\ \gtreqless\ 0
+  \begin{cases}
+    >0 & \text{Edgeworth complements: }g\text{ raises MU of }c\\
+    =0 & \text{separable: \bilbiie{} baseline}\\
+    <0 & \text{Edgeworth substitutes: }g\text{ lowers MU of }c
+  \end{cases}
+\end{equation}
+We allow this to differ across types, capturing the empirically motivated idea
+that wealthier unconstrained households substitute public for private services
+($U_{cg}^{S}<0$), while constrained households rely on public provision to
+complement their private spending ($U_{cg}^{H}>0$).
+
+\paragraph{Steady-state utility curvature elasticities.}
+All effects of non-separability on equilibrium allocations are summarized by two
+type-specific steady-state elasticities. Let overbars denote steady-state
+values. Define
+\begin{equation}\label{eq:elasticities}
+  \epsilon^{j}_{cc}\equiv-\frac{U^{j}_{cc}\bar c}{\bar U^{j}_{c}}>0,
+  \qquad
+  \epsilon^{j}_{cg}\equiv-\frac{U^{j}_{cg}\bar g}{\bar U^{j}_{c}}.
+\end{equation}
+$\epsilon^{j}_{cc}$ is the consumption Euler elasticity (equals $\sigma$ in
+separable CRRA). $\epsilon^{j}_{cg}$ is the cross-elasticity of marginal utility
+with respect to $g$: negative under complementarity ($U_{cg}^{j}>0$), positive
+under substitutability ($U_{cg}^{j}<0$), zero under separability. These two
+numbers -- evaluated at steady state for each type -- are the only objects from
+the utility function that enter the equilibrium conditions.
+
+\begin{assumption}[General non-separable preferences]\label{asm:general}
+The utility function $U^{j}(c,g,n)$ satisfies the sign conditions above. The
+heterogeneous-internalization case has $\epsilon^{S}_{cg}>0$ (savers
+substitute: government spending reduces their marginal utility of private
+consumption) and $\epsilon^{H}_{cg}<0$ (\HtM{} complement: government spending
+raises their marginal utility of private consumption). The symmetric cases
+$\epsilon^{S}_{cg}=\epsilon^{H}_{cg}$ and the separable case
+$\epsilon^{j}_{cg}=0$ are nested as restrictions.
+\end{assumption}
+
+\paragraph{Linearized optimality conditions.}
+Log-linearizing the intratemporal FOC $-U^{j}_{n}=w_{t}U^{j}_{c}$ and the saver
+Euler equation $U^{S}_{c}(c^{S}_{t},g_{t})=\beta R_{t}\mathbb{E}_{t}
+U^{S}_{c}(c^{S}_{t+1},g_{t+1})$ (see Appendix~\ref{app:general-nonsep} for full
+derivations):
+\begin{align}
+  \phi\,\hat n^{j}_{t} &= \hat w_{t} - \epsilon^{j}_{cc}\hat c^{j}_{t}
+    - \epsilon^{j}_{cg}\hat g_{t},\qquad j\in\{S,H\}, \label{eq:intratemp}\\
+  \hat c^{S}_{t} &= \mathbb{E}_{t}\hat c^{S}_{t+1}
+    -\frac{1}{\epsilon^{S}_{cc}}\hat r_{t}
+    -\frac{\epsilon^{S}_{cg}}{\epsilon^{S}_{cc}}(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}).
+    \label{eq:euler}
+\end{align}
+These are the only two equations that differ from \bilbiie{}. Budget constraints,
+market clearing, production, and profit equations are unchanged.
+
+\begin{remark}[Two channels of non-separability]\label{rem:two-channels}
+The term $-\epsilon^{j}_{cg}\hat g_{t}$ in \eqref{eq:intratemp} is the
+\emph{labor-supply channel}: under $\epsilon^{j}_{cg}<0$ (complements), a rise
+in $g$ raises the marginal utility of consumption, making wages more valuable
+and inducing more labor supply. The term
+$-(\epsilon^{S}_{cg}/\epsilon^{S}_{cc})(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1})$
+in \eqref{eq:euler} is the \emph{saver direct-demand channel}: under
+$\epsilon^{S}_{cg}<0$, a positive spending shock (which is expected to decay
+under AR(1): $\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}=(1-\rho_{g})\hat g_{t}>0$)
+directly stimulates saver consumption today. Both channels are absent in the
+separable case $\epsilon^{j}_{cg}=0$.
+\end{remark}
+
+\paragraph{Savers.}
+Savers maximize
+$\mathbb{E}_{0}\sum_{t=0}^{\infty}\beta^{t}U^{S}(c^{S}_{t},g_{t},n^{S}_{t})$
+subject to
+\begin{equation}\label{eq:saver-budget}
+  c^{S}_{t}+b_{t}\le w_{t}n^{S}_{t}+R_{t-1}b_{t-1}+T^{S}_{t}+\tau_{D}D^{S}_{t}.
+\end{equation}
+The linearized optimality conditions are \eqref{eq:intratemp} and
+\eqref{eq:euler} for $j=S$.
+
+\paragraph{Hand-to-mouth households.}
+\HtM{} households consume their disposable income each period:
+\begin{equation}\label{eq:htm-budget}
+  c^{H}_{t}=w_{t}n^{H}_{t}+T^{H}_{t}-t^{H}_{t},
+\end{equation}
+where $T^{H}_{t}$ includes profit redistribution and $t^{H}_{t}=(\mu/\lambda)g_{t}$
+is their tax burden under the balanced budget. The linearized intratemporal
+condition is \eqref{eq:intratemp} for $j=H$.
+
+\begin{assumption}[Linear effective consumption -- parametric special case]
+\label{asm:linear}
+The utility function takes the CRRA-linear-aggregator form:
+\begin{equation}\label{eq:linear-util}
+  U^{j}(\ctilde^{j}_{t},n^{j}_{t})=\frac{(\ctilde^{j}_{t})^{1-\sigma}}{1-\sigma}
+  -\frac{(n^{j}_{t})^{1+\phi}}{1+\phi},\qquad
+  \ctilde^{j}_{t}\equiv c^{j}_{t}+\theta^{j}g_{t},
+\end{equation}
+with $\sigma>0$, $\phi>0$, $\theta^{j}\in\mathbb{R}$. Under the zero-profit
+normalization $\bar c^{H}=\bar c^{S}=\bar c$, this delivers closed-form
+expressions for the elasticities:
+\begin{equation}\label{eq:linear-elasticities}
+  \epsilon^{j}_{cc}=\sigma\alpha^{j},\qquad
+  \epsilon^{j}_{cg}=\sigma\Gamma^{j},
+\end{equation}
+where
+$\alpha^{j}\equiv\bar c/(\bar c+\theta^{j}\bar g)$ and
+$\Gamma^{j}\equiv\theta^{j}\bar g/(\bar c+\theta^{j}\bar g)=1-\alpha^{j}$.
+Complementarity corresponds to $\theta^{j}<0$ ($\epsilon^{j}_{cg}<0$),
+substitutability to $\theta^{j}>0$ ($\epsilon^{j}_{cg}>0$), and separability to
+$\theta^{j}=0$ ($\epsilon^{j}_{cg}=0$). The ratio
+$\epsilon^{j}_{cg}/\epsilon^{j}_{cc}=\Gamma^{j}/\alpha^{j}\equiv\psi^{j}
+=\theta^{j}\bar g/\bar c$ is the complementarity--wealth ratio.
+\end{assumption}
+
+All results in Section~\ref{sec:analytical} are stated first under
+Assumption~\ref{asm:general} in terms of $(\epsilon^{j}_{cc},\epsilon^{j}_{cg})$,
+then specialized to Assumption~\ref{asm:linear} using
+\eqref{eq:linear-elasticities}. The four cases nested by
+Assumption~\ref{asm:linear} are: (i) \emph{symmetric complementarity}:
+$\theta^{S}=\theta^{H}=\theta<0$; (ii) \emph{symmetric substitutability}:
+$\theta^{S}=\theta^{H}=\theta>0$; (iii) \emph{separability}:
+$\theta^{S}=\theta^{H}=0$ \citep{Bilbiie2025}; (iv) \emph{heterogeneous
+internalization}: $\theta^{S}>0$, $\theta^{H}<0$.
+
+\paragraph{Aggregate consumption.}
+Aggregate consumption is a weighted average:
+\begin{equation}\label{eq:agg-consumption}
+  C_{t}=\lambda c^{H}_{t}+(1-\lambda)c^{S}_{t}.
+\end{equation}
+
+\subsection{Firms}\label{subsec:firms}
+A representative final-good firm aggregates a continuum of differentiated
+intermediate goods using a CES technology with elasticity of substitution
+$\varepsilon>1$, yielding demand $y_{t}(j)=(p_{t}(j)/P_{t})^{-\varepsilon}Y_{t}$
+and aggregate price index
+$P_{t}=\bigl[\int_{0}^{1}p_{t}(j)^{1-\varepsilon}dj\bigr]^{1/(1-\varepsilon)}$.
+
+Intermediate-goods firm $j$ produces using only labor: $y_{t}(j)=n_{t}(j)$
+(linear technology, so marginal cost equals the real wage: $mc_{t}=w_{t}$).
+Rather than Calvo staggering, we adopt \citet{Rotemberg1982} quadratic
+price-adjustment costs. Each firm pays a real cost
+$\tfrac{\psi_{p}}{2}\bigl[\tfrac{p_{t}(j)}{p_{t-1}(j)}-1\bigr]^{2}Y_{t}$ to
+change its price. The firm's problem delivers the Rotemberg Phillips curve:
+\begin{equation}\label{eq:nkpc}
+  \pi_{t}=\beta\mathbb{E}_{t}\pi_{t+1}+\kappa\hat{mc}_{t}
+        =\beta\mathbb{E}_{t}\pi_{t+1}+\kappa\hat w_{t},
+\end{equation}
+where $\kappa=(\varepsilon-1)/\psi_{p}$ and $\hat{mc}_{t}=\hat w_{t}$ from
+linear production. The government implements an employment subsidy
+$\tau_{s}=1/(\varepsilon-1)$ to eliminate the steady-state markup distortion,
+so $\bar{mc}=1$, $\bar D=0$, and $\bar c^{H}=\bar c^{S}=\bar c$.
+
+\begin{remark}[Rotemberg vs.\ Calvo]
+Rotemberg pricing is isomorphic to Calvo at first order -- both deliver the same
+log-linearized NKPC -- but is analytically cleaner because it avoids tracking
+the distribution of price setters and delivers the cost directly in the firm's
+static problem.
+\end{remark}
+
+\subsection{Government}\label{subsec:government}
+The government purchases $G_{t}$ units of the consumption good each period,
+financed by lump-sum taxes $T_{t}$ and one-period nominal bonds. The government
+budget constraint is
+\begin{equation}\label{eq:govt-bc}
+  G_{t}+R_{t-1}B_{t-1}=T_{t}+B_{t}.
+\end{equation}
+For the analytical results, we assume a balanced budget $T_{t}=G_{t}$ to isolate
+the pure spending multiplier from redistribution effects. Government spending
+follows an AR(1):
+\begin{equation}\label{eq:g-ar1}
+  \hat g_{t}=\rho_{g}\hat g_{t-1}+\varepsilon^{g}_{t},\qquad \rho_{g}\in(0,1).
+\end{equation}
+The central bank sets the nominal interest rate according to a Taylor rule:
+\begin{equation}\label{eq:taylor}
+  \hat\iota_{t}=\phi_{\pi}\pi_{t}+\phi_{y}\hat y_{t}.
+\end{equation}
+For the analytical multiplier derivation, we consider the case of a fixed real
+interest rate ($\hat r_{t}=0$), corresponding either to the zero lower bound or
+an interest-rate peg. This isolates the pure demand-amplification mechanism.
+
+\subsection{Market clearing}\label{subsec:mc}
+Goods market clearing requires
+\begin{equation}\label{eq:mc-goods}
+  \hat y_{t}=\hat c_{t}+\hat g_{t}.
+\end{equation}
+Bond market clearing requires $B_{t}=0$ in equilibrium (zero net supply).

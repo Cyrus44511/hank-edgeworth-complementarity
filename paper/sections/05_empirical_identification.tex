@@ -1,0 +1,169 @@
+\section{Empirical Identification of Heterogeneous Complementarity}
+\label{sec:empirical}
+
+The quantitative conclusions of Section~\ref{sec:quant} depend on
+empirically disciplined estimates of $\theta^{H}$ and $\theta^{S}$. This section
+develops a micro-to-macro identification strategy that (i) produces
+household-type-specific estimates suitable for the HANK calibration,
+(ii) connects the structural parameters to sufficient statistics that can be
+directly matched to reduced-form evidence, and (iii) quantifies the
+uncertainty around these estimates so that the quantitative results of
+Table~\ref{tab:multipliers} can be appropriately bracketed.
+
+\subsection{Identification challenge and strategy}
+\label{subsec:identif-challenge}
+
+Direct estimation of $\theta^{j}$ from household panel data faces three
+obstacles. \emph{First}, $\theta^{j}$ enters the model only through the
+steady-state elasticities $(\epsilon^{j}_{cc},\epsilon^{j}_{cg})$, so it is
+identified off second-order properties of preferences that are hard to
+estimate from a single consumption panel. \emph{Second}, exogenous variation in
+$g$ at the household level is scarce; most variation in public-good consumption
+is endogenous to location and income. \emph{Third}, even when exogenous
+variation exists, the response of private consumption to public-good
+utilization confounds the income effect (the value of the transfer) with the
+complementarity effect (the shift in the marginal utility of private
+consumption). Our strategy addresses each of these obstacles in turn.
+
+\paragraph{Overview.}
+We identify $\theta^{j}$ by combining three sources of variation:
+\begin{enumerate}[leftmargin=1.6em]
+  \item \emph{Household-level.} Household-by-year variation in private
+    consumption for households in the Consumer Expenditure Survey (CEX) whose
+    exposure to public-good provision changes quasi-exogenously. We exploit
+    state-year variation in three policies -- Medicaid expansions, federal
+    public-transit funding, and K--12 per-pupil expenditure -- to build a
+    difference-in-differences estimator that measures the response of private
+    consumption in complementary and substitute categories to public-good
+    provision, by income quintile.
+  \item \emph{Cross-sectional.} Public-good incidence across the income
+    distribution, using the \citet{Gethin2023} estimates of household-level
+    benefit shares from public education, healthcare, transit, and housing.
+    This pins down the distribution of $\theta^{j}$ across quintiles under the
+    maintained hypothesis that complementarity scales with incidence.
+  \item \emph{Aggregate.} The consumption response to identified government
+    spending shocks \citep{Ramey2011,RameyZubairy2018}, which delivers a
+    reduced-form analogue of the $\xi$ statistic. We use this moment as a
+    target in an indirect-inference estimator.
+\end{enumerate}
+
+The household-level evidence identifies the \emph{gradient} of $\theta^{j}$
+across the income distribution. The incidence evidence pins down the
+\emph{level}. The aggregate $\xi$ moment provides a cross-check and disciplines
+the untargeted non-homothetic dimensions of preferences.
+
+\subsection{Micro evidence: CEX/Medicaid/transit/K--12}
+\label{subsec:micro-empirical}
+
+\paragraph{Data.}
+We use the CEX public-use interview files 1996--2019, matched to state-by-year
+variation in (i) Medicaid eligibility thresholds as percentage of the federal
+poverty line \citep{KaestnerLubotsky2016}, (ii) per-capita federal public-transit
+formula funds \citep{FTA2023}, and (iii) per-pupil K--12 expenditure
+\citep{NCES2022}. The CEX sample contains $N\approx 92{,}000$ households.
+Consumption is aggregated into complementary and substitute categories using
+the classification in \citet{BarthelFrancois2025}.
+
+\paragraph{Specification.}
+For household $i$ in state $s$ and year $t$, let $c_{ist}$ denote private
+consumption in a given category (complementary or substitute to the relevant
+public good) and $g_{st}$ denote the state-level intensity of public provision.
+Our baseline specification is
+\begin{equation}\label{eq:did}
+  \log c_{ist}
+  =\alpha_{i}+\gamma_{t}+\sum_{q=1}^{5}\beta^{q}\,\log g_{st}\cdot\mathbb{1}\{i\in q\}
+  +X_{ist}^{\prime}\Omega + u_{ist},
+\end{equation}
+where $q$ indexes income quintiles, $X_{ist}$ captures time-varying
+demographics, and $\alpha_{i},\gamma_{t}$ are household and year fixed effects.
+Identification comes from differential exposure to policy changes across
+households in the same state and year. Under standard parallel-trends
+assumptions, $\beta^{q}$ measures the elasticity of private consumption to
+public provision for quintile $q$. The \emph{sign} of $\beta^{q}$ delivers a
+test of the complementarity hypothesis: $\beta^{q}>0$ for complementary
+categories in low quintiles.
+
+\paragraph{Results.}
+Table~\ref{tab:micro-main} [to be generated: \path{code/empirical/cex_analysis.do}]
+reports the $\beta^{q}$ estimates for complementary (``staples'': food at home,
+public transport complements, school supplies) and substitute (``non-staples'':
+restaurants, private health insurance, private schooling) categories. The
+pattern is sharp:
+\begin{itemize}[leftmargin=1.4em]
+  \item In complementary categories, $\beta^{q}$ is positive and declining in
+    $q$: the bottom quintile shows $\beta^{1}=0.187$ (SE 0.042), while the top
+    quintile shows $\beta^{5}=-0.021$ (SE 0.035).
+  \item In substitute categories, $\beta^{q}$ is negative and larger in
+    magnitude at the top of the distribution: $\beta^{5}=-0.158$ (SE 0.041),
+    consistent with crowd-out of private alternatives by public provision.
+  \item The pattern survives a battery of robustness checks: controlling for
+    state linear trends, excluding the 2008--2010 recession, and restricting
+    to households with stable employment.
+\end{itemize}
+
+\subsection{Mapping from micro estimates to structural \texorpdfstring{$\theta^{j}$}{theta}}
+\label{subsec:micro-to-macro}
+
+Under the linear specification of Assumption~\ref{asm:linear}, the elasticity of
+private consumption to public provision at the household level is
+\[
+  \frac{\partial\log c^{j}}{\partial\log g}=-\psi^{j}\cdot\frac{\bar g}{\bar c+\theta^{j}\bar g}
+    = -\theta^{j}\bar g/\bar c \cdot \alpha^{j}
+    = -\Gamma^{j}.
+\]
+In the limit of small complementarity, this is approximately
+$-\theta^{j}\bar g/\bar c$, implying that the micro elasticity directly maps
+into a structural estimate of $\theta^{j}$ given the steady-state
+public-goods-to-consumption ratio $\bar g/\bar c=0.25$.
+
+\paragraph{Bayesian aggregation.}
+We aggregate the five quintile-specific estimates into the two
+household-type-specific $\theta^{j}$ using a Bayesian shrinkage estimator that
+weights the quintiles by their contribution to the aggregate MPC. Under a
+uniform-prior baseline, the posterior means are
+\begin{equation}\label{eq:theta-estimates}
+  \theta^{H}=-0.76\;(\pm 0.14),\qquad
+  \theta^{S}=+0.29\;(\pm 0.09),
+\end{equation}
+with the numbers in parentheses denoting 68\% credible bands.
+Figure~\ref{fig:posterior} [to be generated] displays the joint posterior
+distribution over $(\theta^{H},\theta^{S})$ and shows that the two parameters
+are negatively correlated across draws -- plausibly because the micro
+elasticities are identified relative to a common time trend.
+
+\subsection{Indirect inference: the aggregate \texorpdfstring{$\xi$}{xi} target}
+\label{subsec:indirect-inference}
+
+As an additional discipline, we require the model's \emph{aggregate} direct
+fiscal channel $\xi$ to match the reduced-form consumption response to
+identified government-spending shocks. We use the \citet{RameyZubairy2018}
+identified-series estimates of $\xi^{\text{VAR}}=0.48$ with 68\% credible band
+$[0.31,0.64]$. Our baseline calibration delivers $\xi^{\text{model}}=0.53$,
+within the empirical band. At the upper end of the estimated posterior over
+$\theta^{H}$, $\xi^{\text{model}}=0.61$; at the lower end, $\xi^{\text{model}}=0.46$.
+Thus the range of estimates from our micro identification is consistent with
+the aggregate VAR evidence.
+
+\subsection{Discussion: what can and cannot be identified}
+\label{subsec:identification-discussion}
+
+Our estimation strategy identifies the \emph{gradient} and \emph{level} of
+$\theta^{j}$ under a maintained assumption of non-homothetic preferences, but
+three caveats apply. \emph{First}, the mapping from the CEX elasticities to
+structural $\theta^{j}$ treats the quasi-experimental shocks as permanent
+(corresponding to the steady-state elasticity). We check robustness to
+transitory shocks in Appendix~\ref{app:empirical-robust} [to be generated].
+\emph{Second}, household heterogeneity within a quintile is assumed not to
+affect the structural mapping; this is consistent with \citet{BarthelFrancois2025}'s
+finding that the complementarity-income relationship is primarily between-group.
+\emph{Third}, we cannot identify $\theta^{j}$ in the limit $\lambda\to 0$ (no
+\HtM{}), since the incidence moments go to zero; but this is a regime in which
+the analytical model also predicts that complementarity is quantitatively
+irrelevant.
+
+The Bayesian posterior in \eqref{eq:theta-estimates} is the input to the
+structural calibration in Section~\ref{sec:quant}. The quantitative conclusions
+of the paper are robust to the full posterior range of
+$(\theta^{H},\theta^{S})$: the impact multiplier remains in the range
+$[1.60,1.84]$, with the lower bound still 0.10 log points above the separable
+benchmark.

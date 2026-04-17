@@ -1,0 +1,96 @@
+%% =====================================================================
+%%  On Heterogeneity and Edgeworth Complementarity Between
+%%  Public and Private Consumption: Implications for the Fiscal Multiplier
+%%  Bright Quaye -- Washington University in St. Louis
+%% =====================================================================
+\documentclass[11pt,letterpaper]{article}
+
+% ---------- Geometry and spacing ----------
+\usepackage[margin=1.1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ---------- Fonts and symbols ----------
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+
+% ---------- Graphics and tables ----------
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs,array,tabularx,multirow,threeparttable}
+\usepackage{siunitx}
+\sisetup{detect-weight=true, detect-family=true,
+         group-separator={,}, group-minimum-digits=4}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ---------- Lists, cross-refs, bibliography ----------
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,
+            citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage{cleveref}
+\usepackage[authoryear]{natbib}
+\bibliographystyle{plainnat}
+
+% ---------- Theorem-like environments ----------
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem{result}{Result}
+
+% ---------- Paper-specific macros ----------
+\newcommand{\EC}{Edgeworth complementarity}
+\newcommand{\HtM}{hand-to-mouth}
+\newcommand{\Ucg}{U_{cg}^{j}}
+\newcommand{\ecc}{\epsilon^{j}_{cc}}
+\newcommand{\ecg}{\epsilon^{j}_{cg}}
+\newcommand{\chisep}{\chi^{\mathrm{sep}}}
+\newcommand{\ctilde}{\tilde c}
+\newcommand{\bilbiie}{\citet{Bilbiie2025}}
+\newcommand{\auclert}{\citet{Auclert2024}}
+\newcommand{\BHL}{\citet{BHL2025}}
+
+% ---------- Title ----------
+\title{\textbf{On Heterogeneity and Edgeworth Complementarity Between
+Public and Private Consumption:\\ Implications for the Fiscal Multiplier}\\[4pt]
+\large\textit{Preliminary and incomplete -- please do not circulate}}
+
+\author{Bright Quaye\thanks{Washington University in St.\ Louis. Email:
+\texttt{b.quaye@wustl.edu}. I thank \dots. All errors are mine.}}
+\date{\today}
+
+% =====================================================================
+\begin{document}
+\maketitle
+
+\input{sections/00_abstract}
+\vspace{8pt}\noindent\textit{JEL Classification:} E21, E62, E63.\\
+\textit{Keywords:} Fiscal multiplier; Edgeworth complementarity; heterogeneous agents;
+hand-to-mouth households; MPC/MPE trilemma; public goods.
+
+\clearpage
+\input{sections/01_introduction}
+\input{sections/02_model}
+\input{sections/03_analytical_results}
+\input{sections/04_quantitative_analysis}
+\input{sections/05_empirical_identification}
+\input{sections/06_policy_experiments}
+\input{sections/07_conclusion}
+
+\clearpage
+\bibliography{references}
+
+\clearpage
+\appendix
+\input{sections/A_appendix_full_derivation}
+\input{sections/B_appendix_alternative_derivations}
+\input{sections/C_appendix_general_nonsep}
+\input{sections/D_appendix_model_setup}
+\input{sections/E_appendix_calibration_code}
+
+\end{document}

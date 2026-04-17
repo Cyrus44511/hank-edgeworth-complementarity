@@ -1,0 +1,74 @@
+\section{Full Model Setup and Optimization Problems}\label{app:setup}
+
+This appendix provides the complete model setup, including primitive
+optimization problems for each agent, market clearing conditions, equilibrium
+definition, and the mapping from first-order conditions to the log-linearized
+equilibrium system.
+
+\subsection{Environment}
+Time is discrete, $t=0,1,2,\dots$. The economy has three sectors: households
+(continuum), firms (continuum), and government. All shocks are realized at the
+start of the period.
+
+\subsection{Households}\label{app:households-full}
+Household $i$ is either a saver or \HtM{} in period $t$, with type switching
+stochastically. Each household maximizes
+$\mathbb{E}_{0}\sum_{t=0}^{\infty}\beta^{t}U^{j}(c^{j}_{it},g_{t},n^{j}_{it})$
+subject to type-specific constraints.
+
+\paragraph{Saver problem.}
+\begin{align*}
+  \max_{\{c^{S}_{it},n^{S}_{it},b_{it}\}} & \mathbb{E}_{0}\sum_{t=0}^{\infty}\beta^{t}U^{S}(\tilde c^{S}_{it},n^{S}_{it})\\
+  \text{s.t.}\quad & c^{S}_{it}+b_{it}=w_{t}n^{S}_{it}+R_{t-1}b_{it-1}+T^{S}_{it}+\tau_{D}D^{S}_{it},\\
+  & b_{it}\ge\underline{b},\qquad \tilde c^{S}_{it}=c^{S}_{it}+\theta^{S}g_{t}.
+\end{align*}
+
+\paragraph{\HtM{} problem.}
+\begin{align*}
+  \max_{\{c^{H}_{it},n^{H}_{it}\}} & \mathbb{E}_{0}\sum_{t=0}^{\infty}\beta^{t}U^{H}(\tilde c^{H}_{it},n^{H}_{it})\\
+  \text{s.t.}\quad & c^{H}_{it}=w_{t}n^{H}_{it}+T^{H}_{it}-t^{H}_{it},\qquad
+  \tilde c^{H}_{it}=c^{H}_{it}+\theta^{H}g_{t}.
+\end{align*}
+
+\subsection{Final goods firm}\label{app:final-firm}
+A competitive final-goods firm assembles intermediate goods $y_{t}(j)$ using
+$Y_{t}=\bigl[\int_{0}^{1}y_{t}(j)^{(\varepsilon-1)/\varepsilon}dj\bigr]^{\varepsilon/(\varepsilon-1)}$.
+Cost minimization gives demand for each intermediate:
+$y_{t}(j)=(p_{t}(j)/P_{t})^{-\varepsilon}Y_{t}$.
+
+\subsection{Intermediate goods firms and Rotemberg pricing}\label{app:intermediate-firms}
+Intermediate firm $j$ produces $y_{t}(j)=n_{t}(j)$ with marginal cost $w_{t}$.
+Under Rotemberg adjustment costs, firm $j$ maximizes
+\[
+  \mathbb{E}_{0}\sum_{t=0}^{\infty}\Lambda_{t}\Bigl[\frac{p_{t}(j)}{P_{t}}y_{t}(j)-w_{t}n_{t}(j)-\frac{\psi_{p}}{2}\Bigl(\frac{p_{t}(j)}{p_{t-1}(j)}-1\Bigr)^{2}Y_{t}\Bigr],
+\]
+where $\Lambda_{t}$ is the stochastic discount factor of the savers. The
+first-order condition yields the Rotemberg Phillips curve
+\eqref{eq:nkpc}.
+
+\subsection{Government and monetary policy}\label{app:government}
+Government budget constraint:
+\[
+  G_{t}+R_{t-1}B_{t-1}=T_{t}+B_{t},
+\]
+with balanced budget $T_{t}=G_{t}$ for analytical results. Central bank follows
+Taylor rule $\hat\iota_{t}=\phi_{\pi}\pi_{t}+\phi_{y}\hat y_{t}$.
+
+\subsection{Market clearing}\label{app:market-clearing}
+Labor: $N_{t}=\lambda n^{H}_{t}+(1-\lambda)n^{S}_{t}$. Goods:
+$Y_{t}=C_{t}+G_{t}$. Bonds: $B_{t}=0$ in equilibrium. Consumption aggregate:
+$C_{t}=\lambda c^{H}_{t}+(1-\lambda)c^{S}_{t}$.
+
+\subsection{Equilibrium definition}\label{app:equilibrium}
+A competitive equilibrium consists of sequences of allocations, prices, and
+government variables such that: (i) households optimize given prices; (ii)
+firms optimize given wages and aggregate demand; (iii) government budget is
+satisfied; (iv) markets clear.
+
+\subsection{From FOCs to equilibrium conditions}\label{app:foc-to-eq}
+Log-linearizing the equilibrium conditions around the symmetric zero-inflation
+steady state gives the system \eqref{eq:intratemp}, \eqref{eq:euler}, the
+Phillips curve \eqref{eq:nkpc}, the Taylor rule \eqref{eq:taylor}, and market
+clearing \eqref{eq:mc-goods}. The analytical results of
+Section~\ref{sec:analytical} follow from this system by imposing $\hat r_{t}=0$
+and solving for the on-impact multiplier.

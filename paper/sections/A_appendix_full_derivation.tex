@@ -1,0 +1,217 @@
+\section{Full Model: Chronological Step-by-Step Derivation}\label{app:fullderivation}
+
+This appendix provides a complete, self-contained derivation of the fiscal
+multiplier from first principles. We build the model chronologically --
+preferences, optimality conditions, market clearing, and then the multiplier
+-- working with the general heterogeneous $(\theta^{S},\theta^{H})$ case
+throughout. Every algebraic step is shown explicitly. Special cases are
+verified at each stage.
+
+\subsection{Notation and parameters}\label{app:notation}
+
+For any variable $X_{t}$, $\hat X_{t}\equiv(X_{t}-\bar X)/\bar X$ denotes the
+log-deviation from steady state, where $\bar X$ is the steady-state value.
+
+\paragraph{Parameters.}
+\begin{center}
+\begin{tabular}{ll}
+$\sigma>0$            & Inverse elasticity of intertemporal substitution\\
+$\phi>0$              & Inverse Frisch elasticity of labor supply\\
+$\beta\in(0,1)$       & Discount factor\\
+$\lambda\in(0,1)$     & Steady-state fraction of \HtM{} households\\
+$s\in(0,1)$           & Probability saver remains saver (THANK only)\\
+$\tau_{D}\in(0,1)$    & Profit redistribution rate\\
+$\mu\in(0,1)$         & Tax progressivity ($H$ pays $\mu/\lambda$ per unit of $g$)\\
+$\rho_{g}\in(0,1)$    & Persistence of government spending shock\\
+\end{tabular}
+\end{center}
+
+\paragraph{Type-specific complementarity objects.}
+For $j\in\{S,H\}$, under the zero-profit normalization $\bar c^{H}=\bar c^{S}=\bar c$:
+\begin{align*}
+  \alpha^{j} &\equiv \frac{\bar c}{\bar c + \theta^{j}\bar g}
+    && \text{(share of private in effective consumption)}\\
+  \Gamma^{j} &\equiv \frac{\theta^{j}\bar g}{\bar c+\theta^{j}\bar g}=1-\alpha^{j}
+    && \text{(complementarity ratio)}\\
+  \psi^{j} &\equiv \frac{\Gamma^{j}}{\alpha^{j}}=\frac{\theta^{j}\bar g}{\bar c}
+    && \text{(complementarity--wealth ratio)}.
+\end{align*}
+Note $\alpha^{j}+\Gamma^{j}=1$ always. Under $\theta^{j}<0$: $\alpha^{j}>1$,
+$\Gamma^{j}<0$. Under $\theta^{j}>0$: $\alpha^{j}<1$, $\Gamma^{j}>0$. Under
+$\theta^{j}=0$: $\alpha^{j}=1$, $\Gamma^{j}=0$ (\bilbiie{}'s separable case).
+
+\paragraph{Derived structural objects.}
+\begin{align*}
+  K &\equiv \phi + 1 - \phi\tau_{D}/\lambda
+    && \text{(appears in $H$ budget constraint)}\\
+  D &\equiv (\phi+\sigma\alpha^{H}) - K\sigma\lambda(\alpha^{H}-\alpha^{S})
+    && \text{(common denominator)}\\
+  \zeta &\equiv \frac{\phi}{\phi+\sigma}
+    && \text{(\bilbiie{}'s transfer elasticity, separable)}\\
+  \zeta_{\alpha} &\equiv \frac{\phi}{\phi+\sigma\alpha}
+    && \text{(modified, symmetric $\theta$)}.
+\end{align*}
+
+\subsection{Model primitives}\label{app:primitives}
+
+\paragraph{Households and preferences.}
+A fraction $\lambda$ are \HtM{} ($H$); $1-\lambda$ are savers ($S$). All have
+utility over effective consumption $\tilde c^{j}_{t}=c^{j}_{t}+\theta^{j}g_{t}$
+and labor $n^{j}_{t}$:
+\[
+  U^{j}=\frac{(\tilde c^{j}_{t})^{1-\sigma}}{1-\sigma}-\frac{(n^{j}_{t})^{1+\phi}}{1+\phi}.
+\]
+
+\paragraph{Why $\theta^{j}<0$ implies \EC{}.}
+The cross-partial:
+\[
+  U_{cg}^{j}=\frac{\partial^{2}U^{j}}{\partial c^{j}\partial g}
+    =-\sigma(\tilde c^{j})^{-\sigma-1}\cdot\theta^{j}.
+\]
+Since $\sigma>0$ and $\tilde c^{j}>0$: $U_{cg}^{j}>0$ iff $\theta^{j}<0$. A
+rise in $g$ raises the marginal utility of $c^{j}$ -- definition of \EC{}.
+
+\paragraph{Linearizing effective consumption.}
+$\tilde c^{j}_{t}=c^{j}_{t}+\theta^{j}g_{t}$. Log-linearizing around steady state:
+$\bar{\tilde c}^{j}\hat{\tilde c}^{j}_{t}=\bar c\,\hat c^{j}_{t}+\theta^{j}\bar g\,\hat g_{t}$.
+Dividing by $\bar{\tilde c}^{j}=\bar c+\theta^{j}\bar g$:
+\begin{equation}\label{eq:ctilde-lin}
+  \hat{\tilde c}^{j}_{t}=\underbrace{\frac{\bar c}{\bar c+\theta^{j}\bar g}}_{\alpha^{j}}\hat c^{j}_{t}
+    +\underbrace{\frac{\theta^{j}\bar g}{\bar c+\theta^{j}\bar g}}_{\Gamma^{j}}\hat g_{t}
+  =\alpha^{j}\hat c^{j}_{t}+\Gamma^{j}\hat g_{t}.
+\end{equation}
+
+\paragraph{Production and profits.}
+Linear production: $y_{t}=n_{t}$. Optimal sales subsidy ensures zero steady-state
+profits: $\bar D=0$. This gives $\bar c^{H}=\bar c^{S}=\bar c$. Log-linearized
+profits: $\hat d_{t}=-\hat w_{t}$.
+
+\paragraph{Government and balanced budget.}
+$\hat g_{t}=\rho_{g}\hat g_{t-1}+\varepsilon^{g}_{t}$. Balanced budget $T_{t}=G_{t}$
+gives $\hat t_{t}=\hat g_{t}$. \HtM{} tax: $t^{H}_{t}=(\mu/\lambda)g_{t}$, so
+$\hat t^{H}_{t}=(\mu/\lambda)\hat g_{t}$.
+
+\subsection{Intratemporal optimality conditions}\label{app:intratemp}
+Both types optimize over labor given their wage:
+\begin{equation}\label{eq:A-foc-labor}
+  (n^{j}_{t})^{\phi}=w_{t}(\tilde c^{j}_{t})^{-\sigma}.
+\end{equation}
+Log-linearizing: $\phi\hat n^{j}_{t}=\hat w_{t}-\sigma\hat{\tilde c}^{j}_{t}$.
+Substituting \eqref{eq:ctilde-lin}:
+\begin{equation}\label{eq:A-intra}
+  \phi\hat n^{j}_{t}=\hat w_{t}-\sigma(\alpha^{j}\hat c^{j}_{t}+\Gamma^{j}\hat g_{t}),
+  \quad j\in\{S,H\}.
+\end{equation}
+
+\subsection{Real wage derivation}\label{app:wage}
+Aggregating \eqref{eq:A-intra} using $\hat n_{t}=\lambda\hat n^{H}_{t}+(1-\lambda)\hat n^{S}_{t}$:
+\begin{equation}\label{eq:A-wage-1}
+  \phi\hat n_{t}=\hat w_{t}-\sigma[\lambda\alpha^{H}\hat c^{H}_{t}+(1-\lambda)\alpha^{S}\hat c^{S}_{t}]
+  -\sigma[\lambda\Gamma^{H}+(1-\lambda)\Gamma^{S}]\hat g_{t}.
+\end{equation}
+Using $\hat c^{S}_{t}=(\hat c_{t}-\lambda\hat c^{H}_{t})/(1-\lambda)$:
+\[
+  \lambda\alpha^{H}\hat c^{H}_{t}+(1-\lambda)\alpha^{S}\hat c^{S}_{t}
+  =\alpha^{S}\hat c_{t}+\lambda(\alpha^{H}-\alpha^{S})\hat c^{H}_{t}.
+\]
+Using $\hat n_{t}=\hat y_{t}=\hat c_{t}+\hat g_{t}$ and solving:
+\begin{equation}\label{eq:A-wage-2}
+  \hat w_{t}=(\phi+\sigma\alpha^{S})\hat c_{t}+\sigma\lambda(\alpha^{H}-\alpha^{S})\hat c^{H}_{t}
+    +[\phi+\sigma\lambda\Gamma^{H}+\sigma(1-\lambda)\Gamma^{S}]\hat g_{t}.
+\end{equation}
+Conjecturing $\hat c^{H}_{t}=\chi\hat c_{t}+\xi\hat g_{t}$ and substituting:
+$\hat w_{t}=W_{c}\hat c_{t}+W_{g}\hat g_{t}$ where
+$W_{c}=(\phi+\sigma\alpha^{S})+\sigma\lambda\chi(\alpha^{H}-\alpha^{S})$ and
+$W_{g}=\phi+\sigma\lambda\Gamma^{H}+\sigma(1-\lambda)\Gamma^{S}+\sigma\lambda\xi(\alpha^{H}-\alpha^{S})$.
+
+\subsection{Hand-to-mouth budget constraint}\label{app:htm}
+\HtM{} consume disposable income. Using $\hat d_{t}=-\hat w_{t}$ and
+$\hat t^{H}_{t}=(\mu/\lambda)\hat g_{t}$:
+\begin{equation}\label{eq:A-htm-1}
+  \hat c^{H}_{t}=\hat w_{t}\Bigl(1-\frac{\tau_{D}}{\lambda}\Bigr)+\hat n^{H}_{t}-\frac{\mu}{\lambda}\hat g_{t}.
+\end{equation}
+Substituting $\hat n^{H}_{t}=(1/\phi)[\hat w_{t}-\sigma\alpha^{H}\hat c^{H}_{t}-\sigma\Gamma^{H}\hat g_{t}]$:
+\[
+  \hat c^{H}_{t}=\hat w_{t}\Bigl(1-\frac{\tau_{D}}{\lambda}\Bigr)
+    +\frac{\hat w_{t}}{\phi}-\frac{\sigma\alpha^{H}}{\phi}\hat c^{H}_{t}
+    -\frac{\sigma\Gamma^{H}}{\phi}\hat g_{t}-\frac{\mu}{\lambda}\hat g_{t}.
+\]
+Collecting $\hat c^{H}_{t}$ and multiplying by $\phi$:
+\begin{equation}\label{eq:A-htm-2}
+  (\phi+\sigma\alpha^{H})\hat c^{H}_{t}=K\hat w_{t}-\Bigl(\sigma\Gamma^{H}+\frac{\mu\phi}{\lambda}\Bigr)\hat g_{t}.
+\end{equation}
+
+\subsection{Solving for $\chi$ and $\xi$}\label{app:chi-xi}
+Substituting the real wage \eqref{eq:A-wage-2} and conjectured
+$\hat c^{H}_{t}=\chi\hat c_{t}+\xi\hat g_{t}$ into \eqref{eq:A-htm-2}:
+\[
+  (\phi+\sigma\alpha^{H})(\chi\hat c_{t}+\xi\hat g_{t})=K(W_{c}\hat c_{t}+W_{g}\hat g_{t})-(\sigma\Gamma^{H}+\mu\phi/\lambda)\hat g_{t}.
+\]
+Matching $\hat c_{t}$ coefficients:
+\[
+  (\phi+\sigma\alpha^{H})\chi=K[(\phi+\sigma\alpha^{S})+\sigma\lambda\chi(\alpha^{H}-\alpha^{S})],
+\]
+which gives
+\[
+  \chi\bigl[(\phi+\sigma\alpha^{H})-K\sigma\lambda(\alpha^{H}-\alpha^{S})\bigr]=K(\phi+\sigma\alpha^{S}),
+\]
+so
+\[
+  \chi(\theta^{S},\theta^{H})=\frac{K(\phi+\sigma\alpha^{S})}{D}.
+\]
+\emph{Verification 1 (symmetric $\alpha^{H}=\alpha^{S}=\alpha$):}
+$D=\phi+\sigma\alpha$, $\chi=K$. \checkmark
+
+\emph{Verification 2 (separable $\alpha^{j}=1$):} $D=\phi+\sigma$, $\chi=K$. \checkmark
+
+Matching $\hat g_{t}$ coefficients:
+\[
+  (\phi+\sigma\alpha^{H})\xi=KW_{g}-\sigma\Gamma^{H}-\mu\phi/\lambda,
+\]
+which gives
+\[
+  \xi\,D=K[\phi+\sigma\lambda\Gamma^{H}+\sigma(1-\lambda)\Gamma^{S}]-\sigma\Gamma^{H}-\mu\phi/\lambda.
+\]
+\emph{Verification 1 (separable):} $\xi=\zeta(\chi-\mu/\lambda)$. \checkmark
+
+\emph{Verification 2 (symmetric):} $\xi=\zeta_{\alpha}\bigl[\chi-\mu/\lambda+\sigma\Gamma(\chi-1)/\phi\bigr]$. \checkmark
+
+\subsection{Saver Euler equation}\label{app:saver-euler}
+The saver Euler equation: $(\tilde c^{S}_{t})^{-\sigma}=\beta R_{t}\mathbb{E}_{t}(\tilde c^{S}_{t+1})^{-\sigma}$.
+Log-linearizing: $-\sigma(\alpha^{S}\hat c^{S}_{t}+\Gamma^{S}\hat g_{t})=\hat r_{t}-\sigma\mathbb{E}_{t}(\alpha^{S}\hat c^{S}_{t+1}+\Gamma^{S}\hat g_{t+1})$.
+Dividing by $-\sigma\alpha^{S}$:
+\[
+  \hat c^{S}_{t}=\mathbb{E}_{t}\hat c^{S}_{t+1}-\frac{1}{\sigma\alpha^{S}}\hat r_{t}
+    -\frac{\Gamma^{S}}{\alpha^{S}}(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}).
+\]
+
+\subsection{THANK self-insurance Euler equation}\label{app:self-insurance}
+In THANK, savers face risk of becoming \HtM:
+\begin{equation}\label{eq:A-insurance}
+  (\tilde c^{S}_{t})^{-\sigma}=\beta R_{t}\mathbb{E}_{t}[s(\tilde c^{S}_{t+1})^{-\sigma}+(1-s)(\tilde c^{H}_{t+1})^{-\sigma}].
+\end{equation}
+Log-linearizing, using $\bar U^{H}_{c}/\bar U^{S}_{c}=(\alpha^{H}/\alpha^{S})^{\sigma}$:
+under symmetric preferences ($\alpha^{H}=\alpha^{S}=\alpha$):
+\[
+  \hat c^{S}_{t}=s\mathbb{E}_{t}\hat c^{S}_{t+1}+(1-s)\mathbb{E}_{t}\hat c^{H}_{t+1}-\frac{1}{\sigma\alpha}\hat r_{t}-\frac{\Gamma}{\alpha}(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}).
+\]
+
+\subsection{Planned expenditure curve and on-impact multiplier}\label{app:PE-mult}
+Aggregate demand closes the model. Substituting $\hat c_{t}=\lambda\hat c^{H}_{t}+(1-\lambda)\hat c^{S}_{t}$ into the Euler equation (under symmetric $\alpha$) and using $\hat y_{t}=\hat c_{t}+\hat g_{t}$:
+\begin{equation}\label{eq:A-PE}
+  \hat c_{t}=[1-\beta(1-\lambda\chi)]\hat y_{t}-\frac{(1-\lambda)\beta}{\sigma\alpha}\hat r_{t}+\beta\delta(1-\lambda\chi)\mathbb{E}_{t}\hat c_{t+1}+\beta\lambda\xi(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}),
+\end{equation}
+where $\delta\equiv 1+(\chi-1)(1-s)/(1-\lambda\chi)$.
+
+Under $\hat r_{t}=0$, $\rho_{g}=0$ (transitory shock), the on-impact multiplier follows from:
+\[
+  (1-\lambda\chi)\hat y_{t}=(1-\lambda\chi+\lambda\xi)\hat g_{t}\implies\mu=1+\frac{\lambda\xi}{1-\lambda\chi}.
+\]
+
+\subsection{Special cases summary}\label{app:cases}
+\begin{itemize}
+  \item Separable ($\theta^{j}=0$, $\alpha^{j}=1$, $\Gamma^{j}=0$): $\xi=\zeta(\chi-\mu/\lambda)$, recovering \bilbiie{}.
+  \item Symmetric ($\theta^{S}=\theta^{H}=\theta$, $\alpha^{H}=\alpha^{S}=\alpha$): $\xi=\zeta_{\alpha}[\chi-\mu/\lambda+\sigma\Gamma(\chi-1)/\phi]$.
+  \item RANK limit ($\lambda\to 0$): $\mu=1-\psi^{S}$, saver direct-demand only.
+  \item Heterogeneous ($\theta^{H}\neq\theta^{S}$): general $\chi,\xi$ expressions with curvature-induced decoupling of MPC and MPE.
+\end{itemize}

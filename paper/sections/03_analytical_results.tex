@@ -1,0 +1,382 @@
+\section{Analytical Results}\label{sec:analytical}
+
+This section is organized in two parts.
+Section~\ref{subsec:general-nonsep} derives all results under the general
+non-separable utility function $U(c^{j},g,n^{j})$ of
+Assumption~\ref{asm:general}, working entirely with the elasticities
+$(\epsilon^{j}_{cc},\epsilon^{j}_{cg})$. These results hold for any utility
+function satisfying Assumption~\ref{asm:general} -- CES, GHH-CRRA, CCRRA, or
+any other form -- and require no parametric restrictions.
+Section~\ref{subsec:linear-effective} then introduces the linear
+effective-consumption form $\tilde c^{j}=c^{j}+\theta^{j}g$
+(Assumption~\ref{asm:linear}) as a tractable parameterization that allows
+closed-form corollaries, numerical calibration, and simulation. Researchers
+wishing to use alternative functional forms -- such as CES utility -- can
+substitute their own $(\epsilon^{j}_{cc},\epsilon^{j}_{cg})$ directly into the
+general results of Section~\ref{subsec:general-nonsep}.
+
+Full derivations are in Appendix~\ref{app:general-nonsep}; the complete model
+setup is in Appendix~\ref{app:setup}.
+
+\subsection{General non-separable preferences}\label{subsec:general-nonsep}
+
+\subsubsection{Two sufficient statistics}
+The standard separable HANK multiplier depends on one sufficient statistic:
+income cyclicality $\chi$ \citep{Bilbiie2025}. Introducing $U_{cg}^{j}\neq 0$
+creates a second: the direct fiscal channel $\xi$. These two objects are
+cleanly separated. $\chi$ is determined by own-consumption curvature
+$\epsilon^{j}_{cc}$ only. $\xi$ is determined by the cross-elasticities
+$\epsilon^{j}_{cg}$ only. This separation holds in full generality under
+Assumption~\ref{asm:general} and is the structural foundation of all results
+that follow.
+
+\subsubsection{Notation: tax progressivity}
+Following \citet{Bilbiie2025}, we implement a balanced budget $T_{t}=G_{t}$ with
+profit redistribution rate $\tau_{D}$ and tax progressivity parameter $\mu$ (we
+use $\mu$ rather than \bilbiie{}'s $\alpha$ to avoid clash with
+$\alpha^{j}\equiv\bar c/\bar{\tilde c}^{j}$). \HtM{} households pay per-capita
+taxes $\mu/\lambda$ per unit of spending. Since $T_{t}=G_{t}$, $\hat g_{t}$
+appears in the $H$ budget constraint as a tax term: the balanced budget forces
+taxes to equal spending, and $H$ households bear fraction $\mu/\lambda$.
+
+\subsubsection{Step 1: intratemporal conditions}
+From \eqref{eq:intratemp}:
+\begin{equation}\label{eq:intratemp-restate}
+  \phi\,\hat n^{j}_{t}=\hat w_{t}-\epsilon^{j}_{cc}\hat c^{j}_{t}
+  -\epsilon^{j}_{cg}\hat g_{t},\qquad j\in\{S,H\}.
+\end{equation}
+Under Assumption~\ref{asm:linear}: $\epsilon^{j}_{cc}=\sigma\alpha^{j}$,
+$\epsilon^{j}_{cg}=\sigma\Gamma^{j}$.
+
+\subsubsection{Step 2: the real wage}
+Aggregating \eqref{eq:intratemp-restate} and using
+$\hat c^{S}_{t}=(\hat c_{t}-\lambda\hat c^{H}_{t})/(1-\lambda)$:
+\begin{equation}\label{eq:wage-1}
+  \hat w_{t}=(\phi+\epsilon^{S}_{cc})\hat c_{t}
+    +\lambda(\epsilon^{H}_{cc}-\epsilon^{S}_{cc})\hat c^{H}_{t}
+    +\bigl[\phi+\lambda\epsilon^{H}_{cg}+(1-\lambda)\epsilon^{S}_{cg}\bigr]\hat g_{t}.
+\end{equation}
+Writing $\hat w_{t}=W_{c}\hat c_{t}+W_{g}\hat g_{t}$ with
+$\hat c^{H}_{t}=\chi\hat c_{t}+\xi\hat g_{t}$:
+\begin{align}
+  W_{c}&\equiv(\phi+\epsilon^{S}_{cc})+\lambda\chi(\epsilon^{H}_{cc}-\epsilon^{S}_{cc}),
+    \label{eq:Wc}\\
+  W_{g}&\equiv\phi+\lambda\epsilon^{H}_{cg}+(1-\lambda)\epsilon^{S}_{cg}
+    +\lambda\xi(\epsilon^{H}_{cc}-\epsilon^{S}_{cc}).\label{eq:Wg}
+\end{align}
+
+\subsubsection{Step 3: income cyclicality \texorpdfstring{$\chi$}{chi}}
+Define $K\equiv\phi+1-\phi\tau_{D}/\lambda$ and
+$D\equiv(\phi+\epsilon^{H}_{cc})-K\lambda(\epsilon^{H}_{cc}-\epsilon^{S}_{cc})$.
+
+\begin{proposition}[Income cyclicality -- general]\label{prop:chi-general}
+Under Assumption~\ref{asm:general},
+\begin{equation}\label{eq:chi-general}
+  \chi=\frac{K(\phi+\epsilon^{S}_{cc})}{D}.
+\end{equation}
+$\chi$ depends on $\epsilon^{S}_{cc}$ and $\epsilon^{H}_{cc}$ but not on
+$\epsilon^{j}_{cg}$: income cyclicality is determined by own-consumption
+curvature, not by the non-separability between $c$ and $g$.
+Under Assumption~\ref{asm:linear}:
+$D=(\phi+\sigma\alpha^{H})-K\sigma\lambda(\alpha^{H}-\alpha^{S})$ and
+\begin{equation}\label{eq:chi-linear}
+  \chi(\theta^{S},\theta^{H})=\frac{K(\phi+\sigma\alpha^{S})}{D}.
+\end{equation}
+When $\theta^{S}=\theta^{H}$: $\chi=K=1+\phi(1-\tau_{D}/\lambda)$, \bilbiie{}'s
+expression, independent of $\theta$.
+\end{proposition}
+
+\begin{remark}[Why $\epsilon^{j}_{cg}$ does not appear in $\chi$]
+Income cyclicality $\chi$ measures how \HtM{} income co-moves with aggregate
+output. This is determined by how wage income responds to aggregate demand --
+governed by $\epsilon^{j}_{cc}$ through the labor-supply elasticity -- not by
+how directly government spending affects marginal utility. The non-separability
+between $c$ and $g$ enters the direct fiscal channel $\xi$, not $\chi$.
+\end{remark}
+
+\subsubsection{Step 4: direct fiscal channel \texorpdfstring{$\xi$}{xi}}
+
+\begin{proposition}[Direct fiscal channel -- general]\label{prop:xi-general}
+Under Assumption~\ref{asm:general},
+\begin{equation}\label{eq:xi-general}
+  \xi=\frac{K\bigl[\phi+\lambda\epsilon^{H}_{cg}+(1-\lambda)\epsilon^{S}_{cg}\bigr]
+          -\epsilon^{H}_{cg}-\mu\phi/\lambda}{D}.
+\end{equation}
+$\xi$ depends on both $\epsilon^{H}_{cg}$ and $\epsilon^{S}_{cg}$. Under
+separability ($\epsilon^{j}_{cg}=0$): $\xi\rightarrow\zeta(\chi-\mu/\lambda)$,
+\bilbiie{}'s expression.
+Under Assumption~\ref{asm:linear}, $\epsilon^{j}_{cg}=\sigma\Gamma^{j}$:
+\begin{equation}\label{eq:xi-linear}
+  \xi(\theta^{S},\theta^{H})=
+  \frac{K\bigl[\phi+\sigma\lambda\Gamma^{H}+\sigma(1-\lambda)\Gamma^{S}\bigr]
+        -\sigma\Gamma^{H}-\mu\phi/\lambda}{D}.
+\end{equation}
+\end{proposition}
+
+\noindent In the separable case $\theta^{S}=\theta^{H}=0$ (so $\Gamma^{j}=0$,
+$\alpha^{j}=1$, $D=\phi+\sigma$, $K=\chi$):
+$\xi(0,0)=\zeta(\chi-\mu/\lambda)$ where $\zeta\equiv\phi/(\phi+\sigma)$,
+matching \citet{Bilbiie2025} exactly.
+
+\subsubsection{Step 5: the saver Euler equation}
+The saver's Euler equation with type-specific $\theta^{S}$:
+\begin{equation}\label{eq:euler-linear}
+  \hat c^{S}_{t}=\mathbb{E}_{t}\hat c^{S}_{t+1}
+    -\frac{1}{\sigma\alpha^{S}}\hat r_{t}
+    -\frac{\Gamma^{S}}{\alpha^{S}}(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}).
+\end{equation}
+When $\theta^{S}<0$ (complements): $\Gamma^{S}<0$, so the last term is positive
+when $\hat g_{t}>\mathbb{E}_{t}\hat g_{t+1}$ -- a direct demand stimulus. When
+$\theta^{S}>0$ (substitutes): the term is negative -- government spending
+crowds out saver consumption. In THANK, the self-insurance Euler equation
+introduces the compounding coefficient
+\begin{equation}\label{eq:delta}
+  \delta\equiv 1+(\chi-1)\frac{1-s}{1-\lambda\chi},
+\end{equation}
+which depends on $\chi$ but not directly on $\theta^{j}$.
+
+\subsubsection{Step 6: the planned expenditure curve and multiplier}
+The PE curve in THANK with general $(\theta^{S},\theta^{H})$:
+\begin{equation}\label{eq:PE}
+  \hat c_{t}=[1-\beta(1-\lambda\chi)]\hat y_{t}
+    -(1-\lambda)\frac{\beta\sigma}{\alpha^{S}}\hat r_{t}
+    +\beta\delta(1-\lambda\chi)\mathbb{E}_{t}\hat c_{t+1}
+    +\beta\lambda\xi(\theta^{S},\theta^{H})(\hat g_{t}-\mathbb{E}_{t}\hat g_{t+1}).
+\end{equation}
+
+Setting $\hat r_{t}=0$:
+
+\begin{proposition}[General fiscal multiplier]\label{prop:multiplier-general}
+Under Assumption~\ref{asm:general}, the on-impact fiscal multiplier in THANK
+with heterogeneous non-separable preferences is
+\begin{equation}\label{eq:multiplier}
+  \mu=1+\frac{\lambda\xi}{1-\lambda\chi},
+\end{equation}
+where $\chi$ and $\xi$ are given by \eqref{eq:chi-general} and
+\eqref{eq:xi-general}, and
+$D=(\phi+\epsilon^{H}_{cc})-K\lambda(\epsilon^{H}_{cc}-\epsilon^{S}_{cc})$.
+\end{proposition}
+
+\begin{proof}
+With $\hat r_{t}=0$, $\hat y_{t}=\hat c_{t}+\hat g_{t}$, and
+$\hat c^{H}_{t}=\chi\hat c_{t}+\xi\hat g_{t}$, substitute into goods-market
+clearing. Collecting terms: $(1-\lambda\chi)\hat y_{t}=(1-\lambda\chi+\lambda\xi)\hat g_{t}$.
+Dividing by $(1-\lambda\chi)$ yields \eqref{eq:multiplier}.
+\end{proof}
+
+\begin{corollary}[General heterogeneous internalization]\label{cor:het}
+Under Assumption~\ref{asm:general} with
+$\epsilon^{H}_{cg}\neq\epsilon^{S}_{cg}$, the direct fiscal channel is given by
+\eqref{eq:xi-general}. The multiplier exceeds the separable benchmark
+($\xi>\xi^{\mathrm{sep}}$) if and only if the \emph{distributional dominance}
+condition holds:
+\begin{equation}\label{eq:dom-cond}
+  (K\lambda-1)\epsilon^{H}_{cg}+K(1-\lambda)\epsilon^{S}_{cg}>0.
+\end{equation}
+When $\epsilon^{H}_{cg}<0$ (\HtM{} complements, $U^{H}_{cg}>0$) and
+$\epsilon^{S}_{cg}>0$ (savers substitute, $U^{S}_{cg}<0$), the two terms push
+in opposite directions. Condition \eqref{eq:dom-cond} is satisfied when \HtM{}
+complementarity is sufficiently strong relative to saver substitutability,
+weighted by $K\lambda-1$.
+\end{corollary}
+
+\begin{proposition}[General MPC/MPE decoupling]\label{prop:decoupling}
+Under Assumption~\ref{asm:general} with $\epsilon^{H}_{cc}\neq\epsilon^{S}_{cc}$,
+income cyclicality $\chi$ depends on $\epsilon^{H}_{cc}-\epsilon^{S}_{cc}$
+independently of $\lambda$, while the aggregate MPC depends on $\lambda$ but
+not on $\epsilon^{j}_{cc}$. A researcher can therefore independently target
+\textbf{(i)} the aggregate MPC, by choosing $\lambda$;
+\textbf{(ii)} the aggregate MPE ($=\chi$), by choosing
+$\epsilon^{H}_{cc}-\epsilon^{S}_{cc}$;
+\textbf{(iii)} the fiscal multiplier, by choosing
+$\epsilon^{H}_{cg}-\epsilon^{S}_{cg}$ through \eqref{eq:dom-cond}.
+In the general specification these three instruments are mutually independent:
+$\epsilon^{j}_{cc}$ and $\epsilon^{j}_{cg}$ are free parameters not linked by
+any parametric restriction.
+\end{proposition}
+
+\begin{remark}[Applicability to alternative functional forms]
+Propositions~\ref{prop:multiplier-general} and~\ref{prop:decoupling} and
+Corollary~\ref{cor:het} apply to any utility function satisfying
+Assumption~\ref{asm:general}. For example, a researcher using CES utility
+$U^{j}=\bigl[(c^{j})^{\rho}+\psi(g)^{\rho}\bigr]^{(1-\sigma)/\rho}$ need only
+compute the steady-state elasticities $\epsilon^{j}_{cc}$ and $\epsilon^{j}_{cg}$
+from their chosen functional form and substitute directly into
+\eqref{eq:chi-general}, \eqref{eq:xi-general}, and \eqref{eq:multiplier}. No
+re-derivation is required.
+\end{remark}
+
+\subsection{Linear effective consumption: a tractable
+parameterization}\label{subsec:linear-effective}
+We now specialize the general results to the linear effective consumption form
+of Assumption~\ref{asm:linear}: $\tilde c^{j}=c^{j}+\theta^{j}g$, which gives
+$\epsilon^{j}_{cc}=\sigma\alpha^{j}$ and $\epsilon^{j}_{cg}=\sigma\Gamma^{j}$
+where $\alpha^{j}=\bar c/(\bar c+\theta^{j}\bar g)$ and
+$\Gamma^{j}=\theta^{j}\bar g/(\bar c+\theta^{j}\bar g)$. This parameterization
+is convenient for three reasons: (i) it collapses heterogeneous internalization
+to a single parameter $\theta^{j}$ per type; (ii) it delivers closed-form
+corollaries; and (iii) it maps directly to calibration and simulation. The
+parameter $\theta^{j}\in(-\bar c/\bar g,\infty)$ with $\theta^{j}=0$ nesting
+separability, $\theta^{j}<0$ complementarity, and $\theta^{j}>0$
+substitutability.
+
+\begin{corollary}[\bilbiie{} separable benchmark]\label{cor:bilbiie}
+When $\theta^{S}=\theta^{H}=0$: $\chi=1+\phi(1-\tau_{D}/\lambda)$,
+$\xi=\zeta(\chi-\mu/\lambda)$, and
+\begin{equation}\label{eq:mult-bilbiie}
+  \mu^{\mathrm{Bilbiie}}=1+\frac{\lambda\zeta(\chi-\mu/\lambda)}{1-\lambda\chi}.
+\end{equation}
+\end{corollary}
+
+\begin{corollary}[RANK benchmark]\label{cor:rank}
+In the representative-agent limit $\lambda\to 0$, for any $(\theta^{S},\theta^{H})$:
+\begin{equation}
+  \mu^{\mathrm{RANK}}(\theta^{S})=1-\psi^{S}=1+\frac{|\theta^{S}|\bar g}{\bar c}.
+\end{equation}
+Only the saver direct-demand channel survives. This recovers
+\citet{BouakezRebei2007} under $\theta^{S}<0$.
+\end{corollary}
+
+\begin{corollary}[Symmetric complementarity]\label{cor:sym}
+When $\theta^{S}=\theta^{H}=\theta<0$: $\alpha^{S}=\alpha^{H}=\alpha>1$,
+$D=\phi+\sigma\alpha$, $\chi=K=1+\phi(1-\tau_{D}/\lambda)$ (identical to
+\bilbiie{}'s separable expression), and
+\begin{equation}\label{eq:xi-sym}
+  \xi(\theta)=\zeta_{\alpha}\Bigl(\chi-\tfrac{\mu}{\lambda}+\tfrac{\sigma\Gamma(\chi-1)}{\phi}\Bigr),
+\end{equation}
+where $\zeta_{\alpha}=\phi/(\phi+\sigma\alpha)<\zeta=\phi/(\phi+\sigma)$.
+For $\chi>1$ (countercyclical inequality, empirically standard):
+$\xi(\theta)<\xi(0)$ because (i) $\zeta_{\alpha}<\zeta$ (scaling dampening)
+and (ii) $\sigma\Gamma(\chi-1)/\phi<0$ (since $\Gamma<0$ under complementarity).
+Consequently,
+$\mu^{\mathrm{sym}}(\theta)<\mu^{\mathrm{Bilbiie}}$ when $\chi>1$.
+\end{corollary}
+
+\begin{corollary}[Heterogeneous internalization]\label{cor:het-explicit}
+Under the empirically plausible case $\theta^{S}>0$ (savers: substitutes) and
+$\theta^{H}<0$ (\HtM: complements): $\alpha^{S}<1<\alpha^{H}$,
+$\Gamma^{S}>0>\Gamma^{H}$. Income cyclicality is
+\begin{equation}
+  \chi(\theta^{S},\theta^{H})=
+  \frac{K(\phi+\sigma\alpha^{S})}
+       {(\phi+\sigma\alpha^{H})-K\sigma\lambda(\alpha^{H}-\alpha^{S})}.
+\end{equation}
+Since $\alpha^{H}>\alpha^{S}$, the denominator $D<\phi+\sigma\alpha^{H}$,
+making $\chi$ larger than in the symmetric case -- heterogeneous internalization
+\emph{raises} income cyclicality. The multiplier exceeds the separable
+benchmark iff
+\begin{equation}\label{eq:dom-threshold}
+  \underbrace{\frac{\lambda|\xi(\theta^{S},\theta^{H})|}{1-\lambda\chi}}_{\text{HtM amplification}}
+  >\underbrace{|\psi^{S}|\cdot(1-\lambda)}_{\text{Saver dampening}}.
+\end{equation}
+The left side is increasing in $\lambda$; the right side is decreasing. There
+exists a threshold $\lambda^{*}$ above which complementarity dominates.
+\end{corollary}
+
+\begin{remark}[Fiscal policy and inequality]\label{rem:ineq-amp}
+Corollary~\ref{cor:het-explicit} implies that fiscal policy is more effective
+in more unequal economies through two reinforcing channels. The standard HANK
+channel: more \HtM{} households means higher aggregate MPC and stronger NK
+Cross. Our new channel: \HtM{} households are precisely those for whom
+government spending is most complementary ($\theta^{H}<0$), raising $\chi$
+and $\xi$ beyond the symmetric case. Inequality and complementarity are
+co-amplifying forces -- not just additive.
+\end{remark}
+
+\subsection{Relation to the MPC/MPE trilemma}\label{subsec:trilemma}
+
+The MPC/MPE trilemma was identified by \citet{Auclert2024}: New Keynesian
+models with frictionless labor supply cannot simultaneously match high
+empirical MPCs, low MPEs, and moderate fiscal multipliers. Their resolution
+requires sticky wages. \BHL{} provide an alternative resolution through $c$--$n$
+complementarity ($U_{cn}\neq 0$), which separates income effects on labor
+supply from the intertemporal substitution elasticity. This subsection shows
+that our $c$--$g$ non-separability ($U_{cg}^{j}\neq 0$ with
+$\theta^{H}\neq\theta^{S}$) provides a third, orthogonal resolution -- one that
+operates through the government-spending margin and requires no modification
+to the $c$--$n$ structure.
+
+\begin{proposition}[MPC/MPE decoupling under heterogeneous internalization]
+\label{prop:mpc-mpe-decoupling}
+Under Assumption~\ref{asm:linear} with $\theta^{S}\neq\theta^{H}$, the
+aggregate MPC (governed primarily by $\lambda$) and the aggregate MPE (governed
+by $\chi(\theta^{S},\theta^{H})$) can be independently targeted. The mechanism
+is $\theta$-induced curvature heterogeneity: since $\epsilon^{j}_{cc}=\sigma\alpha^{j}$
+under Assumption~\ref{asm:linear}, heterogeneous $\theta^{j}$ induces
+$\alpha^{H}\neq\alpha^{S}$, which shifts $\chi$ through the denominator $D$
+independently of $\lambda$. Specifically:
+\textbf{(i)} $\partial\chi/\partial\lambda\neq 0$ and
+$\partial(\mathrm{MPC})/\partial\lambda\neq 0$ -- both are affected by $\lambda$.
+\textbf{(ii)} $\partial\chi/\partial\alpha^{S}\neq 0$ generically, while
+$\partial(\mathrm{MPC})/\partial\alpha^{S}=0$: the curvature gap
+$\alpha^{H}-\alpha^{S}$ (induced by $\theta^{H}-\theta^{S}$) shifts income
+cyclicality (MPE) without affecting the aggregate MPC.
+Under symmetry ($\theta^{S}=\theta^{H}$): $\alpha^{H}=\alpha^{S}$,
+$D=\phi+\sigma\alpha$, $\chi=K$ -- identical to \bilbiie{}'s separable
+expression. The decoupling disappears and the trilemma is not resolved within
+this case.
+\end{proposition}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Three complementary resolutions of the MPC/MPE trilemma.}
+\label{tab:trilemma-comparison}
+\begin{threeparttable}
+\begin{tabular}{@{}p{2.8cm}p{3.0cm}p{3.4cm}p{3.4cm}@{}}
+\toprule
+ & \citet{Auclert2024} & \BHL{} & \textbf{This paper} \\
+\midrule
+Utility & $U(c,n)$ & $U(c,n)$, $U_{cn}\neq 0$ & $U(c,g,n)$, $U_{cg}^{j}\neq 0$ \\[3pt]
+Non-sep.\ type & None (baseline) & $c$--$n$ (cons--lab) & $c$--$g$ (cons--govt) \\[3pt]
+Trilemma route & Sticky wages & $c$--$n$ curvature & $\theta^{H}-\theta^{S}$ gap \\[3pt]
+Requires het.?  & No & No & Yes ($\theta^{H}\neq\theta^{S}$) \\[3pt]
+Fiscal question & Multipliers & Multipliers + FG & Multiplier only \\[3pt]
+Forward guidance & Not addressed & Catch-22 resolved & Outside scope \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item The three mechanisms are mutually compatible: a model combining sticky
+wages, $U_{cn}\neq 0$, and $U_{cg}^{j}\neq 0$ would have the maximum flexibility
+to match all three facts simultaneously. We isolate the $c$--$g$ channel in its
+purest form by maintaining flexible wages and separable $c$--$n$ preferences.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{The HANK puzzles: where our framework stands}\label{subsec:puzzles}
+
+The HANK literature has identified several key challenges -- tensions between
+empirical targets and model implications -- that any tractable HANK framework
+must confront. We now systematically address each.
+
+\paragraph{Puzzle 1: the MPC/MPE trilemma.}
+\emph{Resolution}: Under $\theta^{H}\neq\theta^{S}$, the gap
+$\theta^{H}-\theta^{S}$ shifts $\chi$ independently of $\lambda$
+(Proposition~\ref{prop:mpc-mpe-decoupling}). This works even with fully
+separable $c$--$n$ preferences: the resolution operates entirely through the
+government-spending margin.
+
+\paragraph{Puzzle 2: the forward guidance puzzle / Catch-22.}
+\emph{Outside scope}. Our framework is complementary to the Catch-22 resolution:
+once the forward-guidance puzzle is addressed (e.g.\ by \bilbiie{}'s risk
+channel), our $c$--$g$ complementarity layer can be added on top to further
+discipline fiscal multipliers.
+
+\paragraph{Puzzle 3: the crowding-out puzzle.}
+\emph{Directly resolved and generalized to HANK}. Under complementarity
+($\epsilon^{j}_{cg}<0$), the fiscal multiplier exceeds the separable benchmark
+for any $\lambda>0$ through both the saver direct-demand channel (Euler
+equation) and the \HtM{} labor-supply channel. Our framework is the first to
+show this crowding-out resolution in a tractable heterogeneous-agent model.
+
+\subsection{TANK vs.\ THANK}\label{subsec:tank-thank}
+TANK is the special case $s=1$ (no switching), giving $\delta=1$. The on-impact
+multiplier \eqref{eq:multiplier} is identical in TANK and THANK because
+$\delta$ multiplies only $\mathbb{E}_{t}\hat c_{t+1}$, which is irrelevant for
+transitory shocks. For persistent shocks ($\rho_{g}>0$), THANK generates
+additional amplification when $\chi>1$ (countercyclical inequality) through
+$\delta>1$ -- Euler-equation compounding from precautionary saving. Note
+$\delta$ does not depend on $\theta^{j}$ since $\chi$ in the general case
+depends on $(\theta^{S},\theta^{H})$ but $\delta$ is a function of $\chi$, $s$,
+and $\lambda$ only.
