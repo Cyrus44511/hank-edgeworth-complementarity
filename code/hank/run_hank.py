@@ -21,9 +21,7 @@ import matplotlib.pyplot as plt
 
 from steady_state import solve_steady_state
 from jacobians import compute_jacobian_truncated
-from general_equilibrium import (
-    compute_impact_multiplier_fixed_rate, decompose_multiplier,
-)
+from general_equilibrium import decompose_multiplier
 from household import HouseholdParams, theta_by_wealth
 
 ROOT = Path(__file__).resolve().parent.parent.parent
@@ -58,18 +56,26 @@ def compute_one_configuration(name: str, params: dict, T: int, n_a: int,
     J = compute_jacobian_truncated(ss, T=T)
     print(" done")
 
-    print("  (3/3) Computing GE multiplier...", end="", flush=True)
-    dec = decompose_multiplier(J, ss, T=T)
-    print(f" mu={dec['mu_impact']:.4f}")
+    print("  (3/3) Computing GE multiplier (fixed rate + Taylor)...",
+          end="", flush=True)
+    dec_fix = decompose_multiplier(J, ss, T=T, closure='fixed_rate')
+    dec_tay = decompose_multiplier(J, ss, T=T, closure='taylor')
+    print(f" mu_fix={dec_fix['mu_impact']:.3f}  "
+          f"mu_taylor={dec_tay['mu_impact']:.3f}")
 
     return {
         "name": name, "params": params,
         "C": float(ss.C), "A": float(ss.A),
-        "mu": float(dec['mu_impact']),
-        "direct": float(dec['direct']),
-        "indirect": float(dec['indirect']),
-        "dY_path": dec['dY'].tolist(),
-        "dC_path": dec['dC'].tolist(),
+        "mu_fixed_rate": float(dec_fix['mu_impact']),
+        "mu_taylor":     float(dec_tay['mu_impact']),
+        "direct":        float(dec_tay['direct']),
+        "indirect":      float(dec_tay['indirect']),
+        "dY_path":       dec_tay['dY'].tolist(),
+        "dC_path":       dec_tay['dC'].tolist(),
+        "dpi_path":      dec_tay['paths'].get('dpi', np.zeros(T)).tolist()
+                         if dec_tay['paths'] else [0.0] * T,
+        "dr_path":       dec_tay['paths'].get('dr', np.zeros(T)).tolist()
+                         if dec_tay['paths'] else [0.0] * T,
     }
 
 
@@ -77,23 +83,35 @@ def compute_one_configuration(name: str, params: dict, T: int, n_a: int,
 # Figure 6: IRFs
 # -----------------------------------------------------------------------------
 def plot_irfs(results: List[dict], rho_g: float = 0.80) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
+    """BoE-style four-panel IRF figure: Y, C, pi, r."""
+    fig, axes = plt.subplots(2, 2, figsize=(11, 7.5))
     T_plot = min(20, len(results[0]['dY_path']))
     horizon = np.arange(T_plot)
 
     colors = plt.cm.viridis(np.linspace(0.05, 0.85, len(results)))
-    for r, color in zip(results, colors):
-        axes[0].plot(horizon, r['dY_path'][:T_plot], color=color, lw=1.7,
-                     label=r['name'])
-        axes[1].plot(horizon, r['dC_path'][:T_plot], color=color, lw=1.7,
-                     label=r['name'])
-    for ax, title in zip(axes, ["Output dY/G", "Consumption dC/G"]):
+    panels = [
+        ("dY_path",  "Output response ($dY / dG$)"),
+        ("dC_path",  "Consumption response ($dC / dG$)"),
+        ("dpi_path", "Inflation ($d\\pi$, %-pt)"),
+        ("dr_path",  "Real interest rate ($dr$, %-pt)"),
+    ]
+    for ax, (key, title) in zip(axes.flat, panels):
+        for r, color in zip(results, colors):
+            path = np.array(r.get(key, [0] * T_plot))[:T_plot]
+            # Normalize so t=0 response to dg is in units of dG_0
+            if key in ("dY_path", "dC_path"):
+                pass  # already in levels of dY/dG
+            else:
+                path = path * 100  # convert to basis points for pi, r
+            ax.plot(horizon, path, color=color, lw=1.7, label=r['name'])
         ax.axhline(0, color='grey', lw=0.5, ls=':')
         ax.set_xlabel("Horizon (quarters)")
         ax.set_title(title)
         ax.grid(True, alpha=0.3)
-    axes[0].legend(loc="upper right", fontsize=8)
-    fig.suptitle(f"Figure 6. IRFs to a 1% G shock (rho_g = {rho_g})")
+    axes[0, 0].legend(loc="upper right", fontsize=8)
+    fig.suptitle(f"Figure 6. IRFs to a 1% G shock, Taylor rule "
+                 f"($\\rho_g={rho_g}$, $\\phi_\\pi=1.5$, $\\phi_y=0.125$)",
+                 y=1.00)
     fig.tight_layout()
     fig.savefig(FIG_DIR / "fig6_irfs.pdf")
     plt.close(fig)
@@ -182,14 +200,17 @@ def main() -> None:
                             "dY_path": [0.0] * T, "dC_path": [0.0] * T})
 
     # Print Table 4
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 70)
     print("  Table 4: Impact fiscal multipliers (HANK)")
-    print("=" * 60)
-    print(f"  {'Configuration':<35s} {'mu':>8s} {'direct':>8s} {'indirect':>10s}")
+    print("=" * 70)
+    hdr = f"  {'Configuration':<35s} {'mu_fixed':>10s} {'mu_taylor':>10s} {'direct':>10s}"
+    print(hdr)
+    print("  " + "-" * 66)
     for r in results:
-        print(f"  {r['name']:<35s} {r['mu']:>8.4f} "
-              f"{r.get('direct', float('nan')):>8.4f} "
-              f"{r.get('indirect', float('nan')):>10.4f}")
+        print(f"  {r['name']:<35s} "
+              f"{r.get('mu_fixed_rate', float('nan')):>10.4f} "
+              f"{r.get('mu_taylor', float('nan')):>10.4f} "
+              f"{r.get('direct', float('nan')):>10.4f}")
 
     # Save results to JSON for the paper
     out = ROOT / "data" / "processed" / "hank_results.json"

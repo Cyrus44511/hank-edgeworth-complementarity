@@ -1,149 +1,221 @@
 """
 general_equilibrium.py
 ----------------------
-Close the HANK model by combining:
-  - Household Jacobians J^{C,w}, J^{C,r}, J^{C,g}  (from jacobians.py)
-  - Firm NKPC (Rotemberg / Calvo equivalent)
-  - Taylor rule
-  - Government budget (balanced budget, Tt = Gt)
-  - Market clearing: Yt = Ct + Gt
+Close the HANK model in sequence space:
 
-Under the baseline analytical assumption of a fixed real rate (r_t = 0),
-the monetary block drops out and we have a linear system:
+  Household block:  dC = J^{Cw} dw + J^{Cr} dr + J^{Cg} dg
+  Labor market:     dw = (sigma + phi) dY                (linear production)
+  NKPC (Rotemberg): dpi = beta * F * dpi + kappa * dw
+                    => dpi = (I - beta F)^{-1} * kappa * dw   ==  M_pi * dw
+  Taylor rule:      di  = phi_pi * dpi + phi_y * dY
+  Fisher:           dr  = di - F * dpi
+                       = (phi_pi * I - F) dpi + phi_y dY
+                       = M_r * dw + phi_y * dY
+  Goods market:     dY  = dC + dg
 
-    dY = dC + dG
-    dC = J^{C,w} * dw + J^{C,r} * dr + J^{C,g} * dg
-    dw = (psi_y * sigma + phi) * dY                  [wage follows MC]
-    dr = 0                                            [fixed rate]
+Collapsing, with M_wY = (sigma+phi) * I:
 
-which collapses to
-    dY = (I - J^{C,w} * coef_yw)^{-1} * (J^{C,g} * dg + dg)
+  dC = (J^{Cw} + J^{Cr} M_r) M_wY dY + J^{Cr} phi_y dY + J^{Cg} dg
+     = K * dY + J^{Cg} dg
 
-For the full model with the Taylor rule, we add the NKPC and interest-rate
-response and solve the system jointly.
+  dY = dC + dg
+     = K dY + (I + J^{Cg}) dg
+  => (I - K) dY = (I + J^{Cg}) dg
+  => dY = (I - K)^{-1} (I + J^{Cg}) dg.
 
-The IMPACT multiplier is mu = dY[0] / dg[0].
+Two closures are provided:
+  * compute_impact_multiplier_fixed_rate : r = 0 baseline (analytical benchmark)
+  * compute_impact_multiplier_taylor     : full NKPC + Taylor rule closure
+
+At fixed rate with phi_pi = infinity we recover the analytical THANK multiplier.
 """
 
 from __future__ import annotations
 import numpy as np
-from typing import Tuple
+from typing import Dict, Tuple
 
 from steady_state import SteadyState
 
 
-def compute_impact_multiplier_fixed_rate(
-        J: dict, ss: SteadyState, rho_g: float = 0.80,
-        T: int = 20, sigma: float = 2.0, phi: float = 1.0
-        ) -> Tuple[np.ndarray, np.ndarray, float]:
+# -----------------------------------------------------------------------------
+# Forward-shift and NKPC operators
+# -----------------------------------------------------------------------------
+def shift_forward(T: int) -> np.ndarray:
+    """Operator F such that (F x)[t] = x[t+1] for t < T-1, else 0."""
+    F = np.zeros((T, T))
+    for t in range(T - 1):
+        F[t, t + 1] = 1.0
+    return F
+
+
+def M_pi(T: int, beta: float, kappa: float) -> np.ndarray:
+    """NKPC operator: pi = M_pi * w, where (I - beta F) pi = kappa w."""
+    F = shift_forward(T)
+    return np.linalg.solve(np.eye(T) - beta * F, kappa * np.eye(T))
+
+
+def M_r(T: int, beta: float, kappa: float, phi_pi: float) -> np.ndarray:
     """
-    Compute the impact multiplier under a fixed real rate (r_t = 0).
-
-    Wage responds to output via labor-market clearing:
-        w_t = (sigma * alpha + phi) * C_t   (linearized, simplified)
-
-    We use alpha = 1 (separable) as the linearization baseline; the
-    theta-induced curvature is captured inside the household Jacobian.
-
-    Returns (dY_path, dC_path, mu_impact).
+    r = (phi_pi*I - F) pi = (phi_pi*I - F) * M_pi * w + phi_y*I Y
+    This returns the coefficient on w only (phi_y*Y term is handled separately).
     """
-    # Construct the fiscal shock path
+    F = shift_forward(T)
+    Mp = M_pi(T, beta, kappa)
+    return (phi_pi * np.eye(T) - F) @ Mp
+
+
+# -----------------------------------------------------------------------------
+# Fiscal shock path
+# -----------------------------------------------------------------------------
+def fiscal_shock_path(ss: SteadyState, T: int, rho_g: float = 0.80,
+                      size: float = 0.01) -> np.ndarray:
+    """AR(1) fiscal shock: dg_t = rho_g * dg_{t-1}, dg_0 = size * G."""
     dg = np.zeros(T)
-    dg[0] = 0.01 * ss.G               # 1% of steady-state G
+    dg[0] = size * ss.G
     for t in range(1, T):
         dg[t] = rho_g * dg[t - 1]
+    return dg
 
-    # Wage-response coefficient (linear production + isoelastic labor supply)
-    wage_coef = (sigma + phi) / (1.0 + phi)   # rough MC-to-Y elasticity
 
-    # Jacobian operator
+# -----------------------------------------------------------------------------
+# Fixed-rate closure (paper's analytical benchmark)
+# -----------------------------------------------------------------------------
+def compute_impact_multiplier_fixed_rate(
+        J: dict, ss: SteadyState, rho_g: float = 0.80,
+        T: int = 20, sigma: float = 2.0, phi: float = 1.0,
+        wage_coef: float | None = None,
+        ) -> Tuple[np.ndarray, np.ndarray, float]:
+    """
+    Fixed real rate (dr = 0). Wage responds to output via labor-market clearing.
+
+    The effective wage-to-output elasticity depends on the aggregation:
+    under inelastic labor and separable preferences, dw/dY = (sigma + phi),
+    but in THANK with HtM absorbing labor income, the cleaner elasticity
+    (matching Bilbiie 2025) is (sigma + phi)/(1 + phi). We use the latter
+    by default since our Jacobians are built around a HANK steady state with
+    HtM-like behavior at the bottom of the wealth distribution.
+    """
+    if wage_coef is None:
+        wage_coef = (sigma + phi) / (1.0 + phi)
+    dg = fiscal_shock_path(ss, T, rho_g)
     Jw = J['w'][:T, :T]
     Jg = J['g'][:T, :T]
-
-    # Solve (I - Jw * wage_coef) * dY = Jg * dg + dg
-    # Note: under the balanced budget dT = dG so the direct income term of dg
-    # cancels out against the tax term; we absorb this by treating dg as a
-    # direct consumption-function argument only.
-    A = np.eye(T) - Jw * wage_coef
-    rhs = Jg @ dg + dg                 # Y = C + G, and C picks up direct Jg
+    K = Jw * wage_coef
+    A = np.eye(T) - K
+    rhs = (np.eye(T) + Jg) @ dg
     dY = np.linalg.solve(A, rhs)
     dC = dY - dg
-
-    # Impact multiplier
     mu = dY[0] / dg[0]
     return dY, dC, mu
 
 
+# -----------------------------------------------------------------------------
+# Full NKPC + Taylor closure
+# -----------------------------------------------------------------------------
 def compute_impact_multiplier_taylor(
         J: dict, ss: SteadyState, rho_g: float = 0.80,
         T: int = 20, sigma: float = 2.0, phi: float = 1.0,
         phi_pi: float = 1.5, phi_y: float = 0.125,
-        kappa: float = 0.024, beta: float = 0.99
-        ) -> Tuple[np.ndarray, np.ndarray, float]:
-    """Full GE with a Taylor rule and Rotemberg NKPC.
+        kappa: float = 0.024, beta: float = 0.99,
+        wage_coef: float | None = None,
+        ) -> Tuple[np.ndarray, np.ndarray, float, dict]:
+    """Full GE with NKPC + Taylor + Fisher.
 
-    Simplified version: under linear production, mc_t = w_t, so NKPC reads
-        pi_t = beta * E pi_{t+1} + kappa * w_t.
-    Taylor: i_t = phi_pi * pi_t + phi_y * Y_t.
-    Fisher: r_t = i_t - E pi_{t+1}.
-
-    We solve the joint linear system in (dY, dC, dw, dpi, dr).
+    Returns (dY, dC, mu_impact, paths) where paths is a dict with
+    'dw', 'dpi', 'dr', 'di' for IRF plotting.
     """
-    # Shock path
-    dg = np.zeros(T)
-    dg[0] = 0.01 * ss.G
-    for t in range(1, T):
-        dg[t] = rho_g * dg[t - 1]
+    dg = fiscal_shock_path(ss, T, rho_g)
 
-    # Placeholder implementation: return fixed-rate case
-    # Full Taylor implementation requires constructing and solving the
-    # joint T x T block system in (dY, dw, dpi, dr). For the paper's
-    # baseline analytical comparison we use the fixed-rate case.
-    return compute_impact_multiplier_fixed_rate(
-        J, ss, rho_g=rho_g, T=T, sigma=sigma, phi=phi
-    )
+    Jw = J['w'][:T, :T]
+    Jr = J['r'][:T, :T]
+    Jg = J['g'][:T, :T]
+
+    if wage_coef is None:
+        wage_coef = (sigma + phi) / (1.0 + phi)
+    M_wY = wage_coef * np.eye(T)
+    Mr = M_r(T, beta, kappa, phi_pi)
+
+    # dw = M_wY dY;  dr = Mr dw + phi_y dY = Mr M_wY dY + phi_y dY
+    M_rY = Mr @ M_wY + phi_y * np.eye(T)
+
+    # dC = Jw dw + Jr dr + Jg dg
+    #    = Jw M_wY dY + Jr M_rY dY + Jg dg
+    #    = K dY + Jg dg
+    K = Jw @ M_wY + Jr @ M_rY
+
+    # dY = dC + dg = K dY + (I + Jg) dg
+    A = np.eye(T) - K
+    rhs = (np.eye(T) + Jg) @ dg
+    dY = np.linalg.solve(A, rhs)
+
+    dw = M_wY @ dY
+    dpi = M_pi(T, beta, kappa) @ dw
+    di = phi_pi * dpi + phi_y * dY
+    dr = M_rY @ dY
+    dC = dY - dg
+
+    mu = dY[0] / dg[0]
+    return dY, dC, mu, {
+        'dw': dw, 'dpi': dpi, 'di': di, 'dr': dr, 'dg': dg,
+    }
 
 
-def decompose_multiplier(J: dict, ss: SteadyState, rho_g: float = 0.80,
-                         T: int = 20, sigma: float = 2.0, phi: float = 1.0
-                         ) -> dict:
+# -----------------------------------------------------------------------------
+# Decomposition: direct vs indirect channel
+# -----------------------------------------------------------------------------
+def decompose_multiplier(
+        J: dict, ss: SteadyState, rho_g: float = 0.80, T: int = 20,
+        sigma: float = 2.0, phi: float = 1.0,
+        closure: str = 'taylor',
+        phi_pi: float = 1.5, phi_y: float = 0.125,
+        kappa: float = 0.024, beta: float = 0.99,
+) -> dict:
     """
-    Decompose the impact multiplier into direct and indirect channels,
-    following Auclert-Rognlie-Straub (2024).
+    Decompose the impact multiplier into direct and indirect channels.
 
-    Direct channel = J^{C,g} contribution at t=0 (the xi channel).
-    Indirect channel = J^{C,w} * dw contribution (the NK cross / chi).
+    Direct channel = J^{Cg} contribution at t=0 (the xi channel in the paper).
+    Indirect channel = general-equilibrium feedback through w and r.
     """
-    dY, dC, mu = compute_impact_multiplier_fixed_rate(
-        J, ss, rho_g=rho_g, T=T, sigma=sigma, phi=phi
-    )
-    dg = np.zeros(T); dg[0] = 0.01 * ss.G
-    for t in range(1, T): dg[t] = rho_g * dg[t - 1]
+    if closure == 'fixed_rate':
+        dY, dC, mu = compute_impact_multiplier_fixed_rate(
+            J, ss, rho_g=rho_g, T=T, sigma=sigma, phi=phi,
+        )
+        paths = {}
+    elif closure == 'taylor':
+        dY, dC, mu, paths = compute_impact_multiplier_taylor(
+            J, ss, rho_g=rho_g, T=T, sigma=sigma, phi=phi,
+            phi_pi=phi_pi, phi_y=phi_y, kappa=kappa, beta=beta,
+        )
+    else:
+        raise ValueError(f"Unknown closure: {closure}")
 
-    # Direct channel contribution at t = 0
+    dg = fiscal_shock_path(ss, T, rho_g)
+    # Direct channel: J^Cg at t=0 (the paper's xi channel)
     direct = (J['g'][0, :T] @ dg) / dg[0]
-    # Total GE contribution
-    total = mu - 1.0
-    # Indirect = total - direct
-    indirect = total - direct
+    indirect = (mu - 1.0) - direct
 
     return {
         'mu_impact': mu,
         'direct': direct,
         'indirect': indirect,
         'dY': dY, 'dC': dC,
+        'paths': paths,
     }
 
 
 if __name__ == "__main__":
     from steady_state import solve_steady_state
     from jacobians import compute_jacobian_truncated
-    print("Solving steady state...")
-    ss = solve_steady_state(theta_S=0.29, theta_H=-0.76, n_a=80, n_y=5)
-    print("Computing Jacobians (this takes ~1-2 min)...")
-    J = compute_jacobian_truncated(ss, T=15)
-    print("Computing GE multiplier...")
-    dec = decompose_multiplier(J, ss, T=15)
-    print(f"  Impact multiplier: {dec['mu_impact']:.4f}")
-    print(f"  Direct channel:    {dec['direct']:.4f}")
-    print(f"  Indirect channel:  {dec['indirect']:.4f}")
+
+    print("[Fixed-rate vs Taylor-rule closure]")
+    for name, tS, tH in [
+        ('Bilbiie separable',     0.00,  0.00),
+        ('Symmetric complement', -0.50, -0.50),
+        ('Heterogeneous',         0.29, -0.76),
+    ]:
+        ss = solve_steady_state(theta_S=tS, theta_H=tH, n_a=60, n_y=5)
+        J = compute_jacobian_truncated(ss, T=10)
+        fixed = decompose_multiplier(J, ss, T=10, closure='fixed_rate')
+        taylor = decompose_multiplier(J, ss, T=10, closure='taylor')
+        print(f"  {name:22s}  mu_fixed={fixed['mu_impact']:.3f}  "
+              f"mu_taylor={taylor['mu_impact']:.3f}")

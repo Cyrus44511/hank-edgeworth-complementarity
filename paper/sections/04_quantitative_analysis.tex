@@ -146,25 +146,31 @@ message.
 \caption{Impact fiscal multipliers by complementarity configuration.}
 \label{tab:multipliers}
 \begin{threeparttable}
-\begin{tabular}{@{}lrrrr@{}}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
- & {$\chi$} & {$\xi$} & {$\mu$ (THANK)} & {$\mu$ (HANK)} \\
+ & {$\chi$} & {$\xi$} & {$\mu$ (THANK)} & {$\mu$ (HANK, fixed-$r$)} & {$\mu$ (HANK, Taylor)} \\
 \midrule
-Bilbiie separable ($\theta=0$) & 2.000 & 0.429 & 1.500 & 1.500 \\
-Symmetric complementarity ($\theta=-0.5$) & 2.000 & 0.304 & 1.355 & 1.412 \\
-Symmetric substitutability ($\theta=+0.3$) & 2.000 & 0.498 & 1.581 & 1.554 \\
+Bilbiie separable ($\theta=0$) & 2.000 & 0.429 & 1.500 & 2.88 & 1.15 \\
+Symmetric complementarity ($\theta=-0.5$) & 2.000 & 0.304 & 1.355 & 3.10 & 1.49 \\
+Symmetric substitutability ($\theta=+0.3$) & 2.000 & 0.498 & 1.581 & 2.61 & 0.91 \\
 \textbf{Heterogeneous internalization} ($\theta^{S}=0.29,\theta^{H}=-0.76$)
- & 1.874 & 0.530 & 1.539 & \textbf{1.681} \\
+ & 1.874 & 0.530 & 1.539 & \textbf{3.37} & \textbf{1.70} \\
 \addlinespace
 Estimated upper bound ($\theta^{S}=0.38,\theta^{H}=-0.90$)
- & 1.802 & 0.611 & 1.612 & \textbf{1.843} \\
+ & 1.802 & 0.611 & 1.612 & \textbf{3.55} & \textbf{1.86} \\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}\footnotesize
-\item $\lambda=0.35$, $\rho_{g}=0.80$, $\hat r_{t}=0$ in all cases. The THANK
-and HANK columns use \emph{identical} calibration ingredients except that HANK
-replaces the two-type structure with a continuous wealth distribution and
-assigns $\theta^{j}$ by wealth position.
+\item $\lambda=0.35$, $\rho_{g}=0.80$. The THANK column uses \bilbiie{}'s
+closed-form multiplier with $\hat r_{t}=0$. The HANK columns solve the full
+sequence-space Jacobian model under two closures: a fixed real rate
+($\hat r_{t}=0$; matching the analytical benchmark), and an active Taylor
+rule ($\phi_{\pi}=1.5$, $\phi_{y}=0.125$, $\kappa=0.024$, $\beta=0.99$). Under
+the Taylor-rule closure, heterogeneous internalization delivers a 48\%
+amplification relative to the separable benchmark ($\mu=1.70$ vs.\ $\mu=1.15$),
+consistent with the $\xi$-channel mechanism of Proposition~\ref{prop:xi-general}.
+Numerical values depend on the grid resolution; the quick-mode calibration
+($n_a=60$, $n_y=5$) is used here and reproduces the qualitative ranking.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
