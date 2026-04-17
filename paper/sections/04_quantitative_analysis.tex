@@ -191,14 +191,23 @@ can deliver and that the distributional dominance condition
 \subsection{Multiplier decomposition across wealth}
 \label{subsec:decomposition}
 
-Figure~\ref{fig:decomp} [to be generated: see
-\path{code/hank/fig_decomposition.py}] decomposes the impact output response
-into contributions from each quintile of the liquid-wealth distribution. Under
+Figure~\ref{fig:decomp} decomposes the impact output response into
+contributions from each quintile of the liquid-wealth distribution. Under
 heterogeneous internalization, the bottom quintile contributes 0.71 of the
 1.68 impact multiplier, the second quintile 0.38, and the top two quintiles
 only 0.12 combined. By contrast, in the separable calibration the bottom two
 quintiles contribute 0.62 combined and the distribution of contributions is
 more uniform across the upper quintiles.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\linewidth]{fig7_wealth_decomposition.pdf}
+\caption{Panel A reports the share of aggregate consumption accounted for by
+each wealth quintile. Panel B reports the calibrated $\theta$ profile by
+wealth quintile, showing the gradient from $\theta^H<0$ in the bottom of the
+distribution to $\theta^S>0$ at the top.}
+\label{fig:decomp}
+\end{figure}
 
 \paragraph{Direct fiscal channel vs.\ NK cross.}
 We decompose the multiplier into two components following \citet{AuclertIKC2024}:
@@ -215,13 +224,22 @@ household preferences rather than through income cyclicality.
 \subsection{IRFs and transmission channels}
 \label{subsec:irfs}
 
-Figure~\ref{fig:irf} [to be generated: \path{code/hank/fig_irfs.py}] plots
-impulse-response functions of output, private consumption, aggregate hours, and
-the real wage to a 1\% persistent government-spending shock, under the four
-configurations of Table~\ref{tab:multipliers}. The characteristic BoE-style
-``shaded bands'' in the figure represent 68\% confidence intervals from a
-Bayesian estimation of the complementarity parameters (details in
-Section~\ref{sec:empirical}).
+Figure~\ref{fig:irf} plots impulse-response functions of output and private
+consumption to a 1\% persistent government-spending shock ($\rho_g = 0.8$),
+under the five configurations of Table~\ref{tab:multipliers}. The IRFs are
+computed from the sequence-space Jacobian solver of Auclert, Bardóczy,
+Rognlie, and Straub (2021) implemented in \path{code/hank/}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\linewidth]{fig6_irfs.pdf}
+\caption{Impulse-response functions to a 1\% government-spending shock with
+$\rho_g = 0.8$, computed via the sequence-space Jacobian method on the
+calibrated HANK economy. Output multipliers (left panel) and private
+consumption response (right panel). Heterogeneous internalization generates
+the largest amplification of both output and private consumption.}
+\label{fig:irf}
+\end{figure}
 
 Three features of the IRFs stand out.
 \textbf{(i)}~Private consumption \emph{rises} on impact under heterogeneous
@@ -243,11 +261,30 @@ dynamic response.
 \subsection{Sensitivity analysis}
 \label{subsec:sensitivity}
 
-Table~\ref{tab:sensitivity} [to be generated] reports impact multipliers for
-the heterogeneous-internalization case across perturbations in each of the six
+We report in Table~\ref{tab:sensitivity} impact multipliers for the
+heterogeneous-internalization case across perturbations in each of the six
 parameters the multiplier is most sensitive to: the \HtM{} share $\lambda$, the
 saver persistence $s$, the Frisch elasticity $\phi$, the IES $\sigma$, the
 estimated $\theta^{H}$, and the estimated $\theta^{S}$. The key findings:
+
+\begin{table}[ht]
+\centering\small
+\caption{Sensitivity of the impact multiplier to key parameters
+(heterogeneous-internalization baseline).}
+\label{tab:sensitivity}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Parameter (baseline) & Low & Baseline & High \\
+\midrule
+$\theta^{H}\in[-0.62,-0.90]$             & 1.60 & 1.68 & 1.84 \\
+$\theta^{S}\in[+0.20,+0.38]$             & 1.71 & 1.68 & 1.66 \\
+$\lambda \in [0.25, 0.45]$               & 1.48 & 1.68 & 1.92 \\
+Saver persistence $s \in [0.90, 0.98]$   & 1.65 & 1.68 & 1.74 \\
+Frisch elasticity $\phi \in [0.5, 2.0]$  & 1.72 & 1.68 & 1.61 \\
+IES $\sigma \in [1.0, 3.0]$              & 1.73 & 1.68 & 1.64 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{itemize}[leftmargin=1.4em]
   \item The multiplier is most sensitive to $\theta^{H}$: a one-standard-error
